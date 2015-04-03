@@ -143,7 +143,10 @@ ul.icons-social{
 	margin: 0;
 }
 
-
+/* PDF icon */
+.pdf-icon{
+	padding-left: 7px;
+}
 
 /* Used for scrolling */
 #bg-scroll{
