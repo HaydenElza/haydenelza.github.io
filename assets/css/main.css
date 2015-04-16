@@ -88,6 +88,11 @@ p{
 	position: relative;
 	color: #5bc5f2;
 }
+.code {
+	font-family: "Lucida Console", Monaco, monospace;
+	font-size: 12;
+	color: lightgreen;
+}
 .side {
 	padding: 10px;
 	position: relative;
