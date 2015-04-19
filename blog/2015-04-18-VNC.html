@@ -53,7 +53,7 @@
 					Would you like to enter a view-only password (y/n)? n
 					</span>
 					<br><br>
-					The default behavior is to save the file to the <span class="code">.vnc/</span> folder unless the <span class="code">-t</span> option is used. <a href="http://www.tightvnc.com/vncpasswd.1.php">Click here to read the vncpasswd man pages to learn more.</a> Enter your password and when prompted if you would like to enter a view-only password respond according to your specific set up. In my case I did not want to set up a view-only password.
+					The default behavior is to save the file to the <span class="code">.vnc/</span> folder unless the <span class="code">-t</span> option is used. <a href="http://www.tightvnc.com/vncpasswd.1.php">Click here to read the vncpasswd man pages to learn more.</a> Enter your password and when prompted. If you would like to enter a view-only password respond accordingly for your specific set up. In my case I did not want to set up a view-only password.
 					<br><br>
 					Now that you have your passwd file you can use it to connect to your VNC server. In my case I renamed the passwd file to the hostname of my remote machine (margaery) so that I could setup a passwd file for each remote server I wanted to connect to. Here is the command I now use to connect to my remote VNC server:
 					<br><br>
@@ -97,11 +97,11 @@
 					alias vncmargaery="vncviewer -passwd ~/.vnc/margaery 192.168.1.100"
 					</span>
 					<br><br>
-					Replace <span class="code">vncmargaery</span> with whatever you want the new alias to be, i.e., what you type into terminal to connect to your VNC server. Just be sure to not enter in a command that already exists. Next enter the command you used from before to connect to your VNC server. This means you will likely need to change the passwd file path and the IP address. Note that you will need to restart your terminal for the changes to take effect so that you can use the alias.
+					Replace <span class="code">vncmargaery</span> with whatever you want the new alias to be, i.e., what you type into terminal to connect to your VNC server. Just be sure to not enter in a command that already exists. Next enter the command you used from before to connect to your VNC server. This means you will likely need to change the passwd file path and the IP address from the example above. Note that you will need to restart your terminal for the changes to take effect so that you can use the alias.
 					<br><br>
 					---
 					<br><br>
-					Well there you have it. We can now connect to a VNC server by either finding it in our openbox menu or by typing the alias into our terminal. I hope this was helpful, and if it was feel free to let me know on twitter of facebook so I know to keep writing this kind of stuff.
+					Well there you have it. We can now connect to a VNC server by either finding it in our openbox menu or by typing the alias into our terminal. I hope this was helpful, and if it was feel free to let me know on twitter or facebook so I know to keep writing this kind of stuff.
 					<br><br>
 					Vi ses!
 				</p>
