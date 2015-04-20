@@ -53,12 +53,12 @@
 					Would you like to enter a view-only password (y/n)? n
 					</span>
 					<br><br>
-					The default behavior is to save the file to the <span class="code">.vnc/</span> folder unless the <span class="code">-t</span> option is used. <a href="http://www.tightvnc.com/vncpasswd.1.php">Click here to read the vncpasswd man pages to learn more.</a> Enter your password and when prompted. If you would like to enter a view-only password respond accordingly for your specific set up. In my case I did not want to set up a view-only password.
+					The default behavior is to save the file to the <span class="code">.vnc/</span> folder unless the <span class="code">-t</span> option is used. <a href="http://www.tightvnc.com/vncpasswd.1.php">Click here to read the vncpasswd man pages to learn more.</a> Enter your password when prompted. If you would like to enter a view-only password respond accordingly for your specific setup. In my case I did not want to set up a view-only password.
 					<br><br>
 					Now that you have your passwd file you can use it to connect to your VNC server. In my case I renamed the passwd file to the hostname of my remote machine (margaery) so that I could setup a passwd file for each remote server I wanted to connect to. Here is the command I now use to connect to my remote VNC server:
 					<br><br>
 					<span class="code">
-					vncviewer -passwd ~/.vnc/margaery 192.168.1.100
+					$ vncviewer -passwd ~/.vnc/margaery 192.168.1.100
 					</span>
 					<br><br>
 					Make sure to use the correct IP that corresponds to your machine. In this case I used a local IP because I do not intend to connect from outside the local network.
