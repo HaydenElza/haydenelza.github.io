@@ -91,7 +91,6 @@ p{
 .col2 img {
 	width: 100%;
 	border-radius: 10%;
-	filter: grayscale(50%);
 }
 .col2 a p {
 	position: absolute;
