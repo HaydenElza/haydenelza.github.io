@@ -4,8 +4,6 @@ title: Skills
 permalink: /skills/
 ---
 
-## Skills
-
 ### GIS
 
 I have several years of experience with GIS software, primarily with ArcGIS 10.x suite (Map, Catalog, ArcPy, Globe, and Scene) but also with some open source software such as QGIS and command line utilities such as GDAL and OGR. Though, it is my firm belief that knowledge of software is secondary to understanding the systematic framework to approaching geographic problems. Advancements in GIS software has lowered the basic know	ledge required to produce a map often leading to less than adequate results that may be misleading or down right wrong. I once heard it said, “GIS: an elegant way of creating rubbish.”

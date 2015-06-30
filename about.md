@@ -4,8 +4,6 @@ title: About
 permalink: /about/
 ---
 
-### Hayden Elza
-
 My name is Hayden Elza and I am a Forester and GIS Specialist.
 				
 My interests are in how GIS, or technology in general, can be used in the field of forestry. This interest is not limited to research, as it also extends to every day tasks such as routine forest inventories and optimizing workflow to produce better quality management plans that benefit both the forest and people whom depend on it.
