@@ -10,5 +10,5 @@ tag:
 - Sweden
 - National Day
 - bog
-external_url: {{ site.baseurl }}blog/2013/06/Nydalasj%C3%B6n/
+external_url: http://elza.me/blog/2013/06/Nydalasj%C3%B6n/
 ---

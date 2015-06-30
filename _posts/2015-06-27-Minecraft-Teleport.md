@@ -10,5 +10,5 @@ tag:
 - warp
 - minecraft
 - raw json
-external_url: {{ site.baseurl }}/blog/2015/06/Minecraft-Teleport
+external_url: http://elza.me/blog/2015/06/Minecraft-Teleport
 ---
