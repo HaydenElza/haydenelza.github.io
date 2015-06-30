@@ -9,4 +9,4 @@ github_username:  haydenelza
 
 # Build settings
 markdown: kramdown
-permalink: /:title
+permalink: /:year/:month/:title
