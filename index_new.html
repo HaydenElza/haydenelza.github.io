@@ -42,7 +42,6 @@ layout: default
     <div class="col2"><img src="/assets/img/index/contact.png" alt="About"><a href="/contact"><p class="text">mail $hayden</p></a></div>
   </div>
 
-
   <h1>Recent Blog Posts:</h1>
 
   <ul class="post-list">
@@ -51,7 +50,7 @@ layout: default
         <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
 
         <h2>
-          <a class="post-link" href="{{ site.baseurl }}/blog/{{ post.url }}">{{ post.title }}</a>
+          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
         </h2>
       </li>
     {% endfor %}
