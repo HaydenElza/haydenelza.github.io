@@ -6,12 +6,12 @@ layout: default
 
   <h1 class="page-heading">Posts</h1>
 
-  <ul class="post-list">
-    {% for page in site.pages %}
-      <h3><a href="{{ page.url }}">{{ page.title }}</a></h3>
-      <p>{{ page.content }}</p>
-    {% endfor %}
-  </ul>
+  <div class="content">
+    <div class="col2"><img src="/assets/img/index/about2.png" alt="About"><a href="/about"><p class="text">$(whoami)</p></a></div>
+    <div class="col2"><img src="/assets/img/index/skills.png" alt="About"><a href="/skills"><p class="text">echo $skills</p></a></div>
+    <div class="col2"><img src="/assets/img/index/portfolio.png" alt="About"><a href="/protfolio"><p class="text">ls ~/portfolio</p></a></div>
+    <div class="col2"><img src="/assets/img/index/contact.png" alt="About"><a href="/contact"><p class="text">mail $hayden</p></a></div>
+  </div>
 
   <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
 
