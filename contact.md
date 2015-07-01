@@ -6,8 +6,6 @@ permalink: /contact/
 
 <a href="http://en.wikipedia.org/wiki/Gjallarhorn"><img id="contact-img" src="/assets/img/gjallarhorn.jpg" class="img" alt="Gjallarhorn" align="middle" style="float: right;"></a>
 
-[![Gjallarhorn](/assets/img/gjallarhorn.jpg)](http://en.wikipedia.org/wiki/Gjallarhorn)
-
 Feel free to get in contact with either by email or by Gjallarhorn!
 
 Primary email: [elza.wisc.edu](mailto:elza.wisc.edu)
