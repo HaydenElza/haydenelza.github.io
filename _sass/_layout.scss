@@ -245,3 +245,10 @@
         }
     }
 }
+
+/* Contact Image */
+#contact-img {
+    @include media-query($on-palm) {
+        float: none;
+    }
+}
