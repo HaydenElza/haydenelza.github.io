@@ -250,5 +250,8 @@
 #contact-img {
     @include media-query($on-palm) {
         float: none !important;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
     }
 }
