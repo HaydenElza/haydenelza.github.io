@@ -2,6 +2,7 @@
 layout: page
 title: Portfolio
 permalink: /porfolio/
+description: Check out some of my work.
 ---
 
 ### Posters
