@@ -2,10 +2,11 @@
 layout: page
 title: About
 permalink: /about/
+description: Tinker hack sail fish hike and mess around.
 ---
 
 My name is Hayden Elza and I am a Forester and GIS Specialist.
-				
+	
 My interests are in how GIS, or technology in general, can be used in the field of forestry. This interest is not limited to research, as it also extends to every day tasks such as routine forest inventories and optimizing workflow to produce better quality management plans that benefit both the forest and people whom depend on it.
 
 In my free time I enjoy tinkering and hacking. My habit is to learn by doing. For instance, one of the first python programs I wrote was to use a RaspberryPi to control the motor controllers in a small robot that could drive around and control a front bucket using a Wii-mote. For me learning in context is important skill for developing a long lasting, useful knowledge base.
