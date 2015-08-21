@@ -203,7 +203,7 @@ pre {
     }
 }
 
-/* Link underline animation */
+/* Page-link underline animation */
 a.page-link{
     position: relative;
     color: #000;
@@ -230,4 +230,14 @@ a.page-link:hover:before{
     visibility: visible;
     -webkit-transform: scaleX(1);
     transform: scaleX(1);
+}
+
+/* Logo hover animation */
+.site-title img{
+  -webkit-transition: -webkit-transform .2s ease-in-out;
+  transition: transform .2s ease-in-out;
+}
+.site-title img:hover{
+  -webkit-transform: rotate(15deg);
+  transform: rotate(15deg);
 }
