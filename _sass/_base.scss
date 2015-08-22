@@ -216,8 +216,8 @@ a.page-link:before{
     content: "";
     position: absolute;
     width: 100%;
-    height: 1px;
-    bottom: 0;
+    height: 2px;
+    bottom: -2px;
     left: 0;
     background-color: #000;
     visibility: hidden;
@@ -240,4 +240,23 @@ a.page-link:hover:before{
 .site-title img:hover{
   -webkit-transform: rotate(15deg);
   transform: rotate(15deg);
+}
+.ring{
+    width: 69px;
+    height: 69px;
+    border-radius: 50%;
+    position: absolute;
+    background-color: transparent;
+    border: 3px black solid;
+    opacity: 0;
+}
+.ring:focus{
+    -webkit-animation-name: ripple;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-duration: 0.8s;
+    -webkit-animation-direction: normal; 
+}
+@-webkit-keyframes ripple {
+    0% {-webkit-transform: scale(1); opacity: 1;}
+    100% {-webkit-transform: scale(1.4); opacity: 0;}
 }
