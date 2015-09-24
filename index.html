@@ -3,34 +3,50 @@ layout: default
 description: Hayden Elza - Forester and GIS Specialist
 ---
 <style>
-  .col2 {
-    width: 43%;
+  #intro-flow {
+    display: table;
+    margin: 25px 0;
+  }
+  #dp {
+    width: 25%;
+    margin: 0 20px 20px 0;
     display: inline-block;
+  }
+  #dp img {
+    transition: ease 0.1s;
+    border-radius: 100%;
+    width: 90%;
+    margin: 5%;
     float: left;
-    margin: 3%;
-    position: relative;
-    border: 1px solid black;
-    /*border-radius: 10%;*/  }
-  .col2 img {
-    width: 100%;
-    /*border-radius: 10%;*/
   }
-  .col2 a p {
-    position: absolute;
+  #dp:hover img {
+    transition: ease 0.1s;
     width: 100%;
-    text-align: center;
-    left: 0;
-    top: 0;
-    font-size: 3em;
-    height: 58%;
-    padding-top: 42%;
-    /*border-radius: 10%;*/
-    opacity: 0;
+    margin: 0;
   }
-  .col2 p:hover {
-    background: rgba(0,0,0,0.7);
-    opacity: 1;
-    color: white;
+  #intro-words {
+    display: inline-block;
+    width: 65%;
+    float: right;
+    margin: 8% 1% 0 0;
+  }
+  .project-preview {
+    width: 40%;
+    margin: 5%;
+  }
+  .project-preview img {
+    border: solid black 1px;
+    margin: 1px;
+  }
+  .project-preview:hover img {
+    border: solid gray 2px;
+    margin: 0;
+  }
+  .float-left {
+    float: left;
+  }
+  .float-right {
+    float: right;
   }
 </style>
 
@@ -40,10 +56,12 @@ description: Hayden Elza - Forester and GIS Specialist
   <h3 style="text-align: center;">Forester / GIS Specialist</h3>
   
   <div class="content" style="overflow: hidden">
-    <div class="col2"><img src="/assets/img/index/about2.png" alt="About"><a href="/about"><p class="text">$(whoami)</p></a></div>
-    <div class="col2"><img src="/assets/img/index/skills.png" alt="Skills"><a href="/skills"><p class="text">echo $skills</p></a></div>
-    <div class="col2"><img src="/assets/img/index/portfolio.png" alt="Portfolio"><a href="/protfolio"><p class="text">ls ~/portfolio</p></a></div>
-    <div class="col2"><img src="/assets/img/index/contact.png" alt="Contact"><a href="/contact"><p class="text">mail $hayden</p></a></div>
+    <div id="intro-flow">
+      <a id="dp" href="/about"><img src="/assets/img/index/about2.png" alt="About"></a>
+      <img id="intro-words" src="/assets/img/index/intro.png">
+    </div>
+    <a class="project-preview float-left" href="http://sampleplotter.com"><img src="/assets/img/index/sampleplotter_preview.png" alt="sampleplotter"></a>
+    <a class="project-preview float-right" href="http://maps.aqua.wisc.edu/opengeoportal"><img src="/assets/img/index/ogp_preview.png" alt="ogp"></a>
   </div>
 
   <br><br>
