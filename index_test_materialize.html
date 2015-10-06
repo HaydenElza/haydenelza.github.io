@@ -40,7 +40,7 @@
 	<div class="navbar-fixed">
 		<nav class="blue-grey darken-1">
 			<div class="nav-wrapper">
-				<a href="/" class="brand-logo" style="padding-left: 25px;"><i class="material-icons">terrain</i></a>
+				<a href="/" class="brand-logo uppercase" style="padding-left: 25px;">Hayden Elza</a>
 				<a href="#" data-activates="mobile-menu" class="button-collapse"><i class="material-icons">menu</i></a>
 				<ul class="right hide-on-med-and-down uppercase">
 					<li><a href="#projects">Projects</a></li>
@@ -58,10 +58,13 @@
 		</nav>
 	</div>
 	<!-- Page Layout -->
-	<div id="title" class="center-align z-depth-1">
+	<div class="parallax-container">
+		<div class="parallax"><img src="./assets/img/drone2.jpg" style="padding-bottom: 300px; width: 150%;"></div>
+	</div>
+	<!--<div id="title" class="center-align z-depth-1">
 		<h1 class="truncate" style="color: white; letter-spacing: 15px;">Hayden Elza</h1>
 		<h4 class="card-panel white truncate" style="display: inline; padding: 5px;">GIS Analyst / Forester</h4>
-	</div>
+	</div>-->
 	<br><br><br>
 	<div class="container">
 		<!-- About -->
@@ -208,10 +211,10 @@
 				<div class="col s12 l4">
 					<h5 class="white-text uppercase">nav</h5>
 					<ul>
-						<li><a class="orange-text text-darken-1 uppercase" href="#!">about</a></li>
-						<li><a class="orange-text text-darken-1 uppercase" href="#!">porfolio</a></li>
-						<li><a class="orange-text text-darken-1 uppercase" href="#!">skills</a></li>
-						<li><a class="orange-text text-darken-1 uppercase" href="#!">contact</a></li>
+						<li><a class="orange-text text-darken-1 uppercase" href="/about">about</a></li>
+						<li><a class="orange-text text-darken-1 uppercase" href="/portfolio">portfolio</a></li>
+						<li><a class="orange-text text-darken-1 uppercase" href="/skills">skills</a></li>
+						<li><a class="orange-text text-darken-1 uppercase" href="/contact">contact</a></li>
 					</ul>
 				</div>
 				<div class="col s12 l8">
@@ -248,6 +251,10 @@
 	// Initialize collapse button
 	$(".button-collapse").sideNav({
 		 closeOnClick: true
+	});
+	// Paralax init
+	$(document).ready(function(){
+		$('.parallax').parallax();
 	});
 </script>
 
