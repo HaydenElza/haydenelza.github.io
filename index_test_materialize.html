@@ -37,7 +37,7 @@
 </head>
 <body>
 	<!-- Navbar -->
-	<div class="navbar-fixed">
+	<div class="">
 		<nav class="blue-grey darken-1">
 			<div class="nav-wrapper">
 				<a href="/" class="brand-logo uppercase" style="padding-left: 25px;">Hayden Elza</a>
@@ -59,7 +59,7 @@
 	</div>
 	<!-- Page Layout -->
 	<div class="parallax-container">
-		<div class="parallax"><img src="./assets/img/drone2.jpg" style="padding-bottom: 300px; width: 150%;"></div>
+		<div class="parallax"><img src="./assets/img/mountains.jpg" style=""></div>
 	</div>
 	<!--<div id="title" class="center-align z-depth-1">
 		<h1 class="truncate" style="color: white; letter-spacing: 15px;">Hayden Elza</h1>
@@ -167,11 +167,11 @@
 						</div>
 					</li>
 					<li>
-						<div class="collapsible-header"><i class="material-icons">build</i>Geographic Systems and Web Dev</div>
+						<div class="collapsible-header"><i class="material-icons">build</i>Geo Systems and Web Dev</div>
 						<div class="collapsible-body">
 							<p>Sea Grant Institute - University of Wisconsin Madison</p>
 							<p style="padding-top: 0;">Manage web resources including web sites and web apps, data servers, supporting databases, and machines.</p>
-							<p style="padding-top: 0;">Develop custom stack consisting in part of WindowsServer2008 Postgres PostGIS Geoserver/Mapserver Tomcat OpenGeoportal/solr/GeoNetwork Apache</p>
+							<p style="padding-top: 0;">Develop custom stack consisting in part of Windows Server 2008, Postgres, PostGIS, Geoserver/Mapserver, Tomcat, OpenGeoportal/solr/GeoNetwork, and Apache.</p>
 						</div>
 					</li>
 				</ul>
@@ -182,23 +182,31 @@
 				<h4>Contact</h4>
 				<div class="divider"></div>
 				<div class="row">
-					<div class="input-field col s12">
-						<i class="material-icons prefix">account_circle</i>
-						<input id="icon_prefix" type="text" class="validate">
-						<label for="icon_prefix">Name</label>
-					</div>
-					<div class="input-field col s12">
-						<i class="material-icons prefix">email</i>
-						<input id="email" type="email" class="validate">
-						<label for="email" data-error="wrong" data-success="right">Email</label>
-					</div>
-					<div class="input-field col s12">
-						<textarea id="textarea1" class="materialize-textarea"></textarea>
-						<label for="textarea1">Message</label>
-					</div>
-					<button class="btn waves-effect waves-light orange darken-1 right" type="submit" name="action">Submit
-						<i class="material-icons right">send</i>
-					</button>
+					<form action="mailto:forms.elza@gmail.com" enctype="text/plain" method="post">
+						<div class="col s12 row">
+							<div class="input-field col s6">
+								<i class="material-icons prefix">account_circle</i>
+								<input name="Name" id="fname" type="text" class="validate">
+								<label for="fname">First Name</label>
+							</div>
+							<div class="input-field col s6">
+								<input name="Surname" id="lname" type="text" class="validate">
+								<label for="lname">Last Name</label>
+							</div>
+						</div>
+						<div class="input-field col s12">
+							<i class="material-icons prefix">email</i>
+							<input name="Email" id="email" type="email" class="validate">
+							<label for="email" data-error="wrong" data-success="right">Email</label>
+						</div>
+						<div class="input-field col s12">
+							<textarea name="Message" id="textarea1" class="materialize-textarea"></textarea>
+							<label for="textarea1">Message</label>
+						</div>
+						<button class="btn waves-effect waves-light orange darken-1 right" type="submit">Submit
+							<i class="material-icons right">send</i>
+						</button>
+					</form>
 				</div>
 			</div>
 		</div>
