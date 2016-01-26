@@ -184,18 +184,10 @@
 				<div class="row">
 					<form action="mailto:forms.elza@gmail.com" enctype="text/plain" method="post">
 						<div class="col s12 row">
-							<div class="input-field col s6">
-								<i class="material-icons prefix">account_circle</i>
-								<input name="Name" id="fname" type="text" class="validate">
-								<label for="fname">First Name</label>
-							</div>
-							<div class="input-field col s6">
-								<input name="Surname" id="lname" type="text" class="validate">
-								<label for="lname">Last Name</label>
-							</div>
+							<input name="Name" id="name" type="text" class="validate">
+							<label for="name">First Name</label>
 						</div>
 						<div class="input-field col s12">
-							<i class="material-icons prefix">email</i>
 							<input name="Email" id="email" type="email" class="validate">
 							<label for="email" data-error="wrong" data-success="right">Email</label>
 						</div>
@@ -227,8 +219,10 @@
 				</div>
 				<div class="col s12 l8">
 					<h5 class="white-text">Recent Blog Posts:</h5>
-					<p class="orange-text text-darken-1" style="margin-bottom: 0px;">date</p>
-					<p class="grey-text text-lighten-4 truncate" style="font-size: 20px; margin-top: 0;">This is a Post Title</p>
+					{% for post in site.posts limit:5 %}
+						<p class="orange-text text-darken-1" style="margin-bottom: 0px;">{{ post.date | date: "%b %-d, %Y" }}</p>
+						<a href="{{ post.url | prepend: site.baseurl }}" class="grey-text text-lighten-4 truncate" style="font-size: 20px; margin-top: 0;">{{ post.title }}</p>
+					{% endfor %}
 				</div>
 			</div>
 		</div>
