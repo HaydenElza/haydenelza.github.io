@@ -74,7 +74,7 @@
 			</div>
 			<div class="col s12 m6 l5">
 				<p>Hey, I'm Hayden.</p>
-				<p>Contemporary Woodsman, Linux Geek, Drone Enthusiast, Maker</p>
+				<p>Woodsman, Linux Geek, Drone Enthusiast, Maker</p>
 				<p>Born and raised in the Fox Valley region of Wisconsin, later moving to Madison, WI to attend university.</p>
 				<p>Rambles out yonder and explores the forests. Equally lost in code to create and automate. Constently tweaking and tinkering in pursuit of perfection. Passion constituted by an elegant mix of nature and technology.</p>
 			</div>
@@ -183,7 +183,7 @@
 				<div class="divider"></div>
 				<div class="row">
 					<form action="mailto:forms.elza@gmail.com" enctype="text/plain" method="post">
-						<div class="col s12 row">
+						<div class="input-field col s12">
 							<input name="Name" id="name" type="text" class="validate">
 							<label for="name">First Name</label>
 						</div>
@@ -219,9 +219,9 @@
 				</div>
 				<div class="col s12 l8">
 					<h5 class="white-text">Recent Blog Posts:</h5>
-					{% for post in site.posts limit:5 %}
+					{% for post in site.posts limit:3 %}
 						<p class="orange-text text-darken-1" style="margin-bottom: 0px;">{{ post.date | date: "%b %-d, %Y" }}</p>
-						<a href="{{ post.url | prepend: site.baseurl }}" class="grey-text text-lighten-4 truncate" style="font-size: 20px; margin-top: 0;">{{ post.title }}</p>
+						<a href="{{ post.url | prepend: site.baseurl }}" class="grey-text text-lighten-4 truncate" style="font-size: 20px; margin-top: 0;">{{ post.title }}</a>
 					{% endfor %}
 				</div>
 			</div>
