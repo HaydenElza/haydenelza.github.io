@@ -1,27 +1,40 @@
 ---
 layout: index
-description: Hayden Elza - Forester and GIS Specialist
+title: Hayden Elza - GIS Developer and Forester - Personal Site
+description: Just a rural Wisconsinite making his way through the world solving life's riddles as they come.
 ---
 
 <style>
+	.site-nav .page-link {
+		color: #444;
+	}
+	a.page-link:hover {
+		color: #444;
+	}
+	a.page-link:before {
+		background-color: #444;
+	}
 	body {
 		background: url(/assets/img/backgrounds/gray_jean.png);
 		color: #444;
 	}
-	svg {
+	.social-icons a svg {
 		height: 1.75em;
 		-webkit-transition: all 0.3s ease-in-out; /** Chrome & Safari **/
 		-moz-transition: all 0.3s ease-in-out; /** Firefox **/
 		-o-transition: all 0.3s ease-in-out; /** Opera **/
 		transition: all 0.3s ease-in-out;
 	}
-	svg path {
-		fill: #444;
-	}
-	svg:hover {
+	.social-icons a svg:hover {
 		-ms-transform: translateY(-5px); /* IE 9 */
 		-webkit-transform: translateY(-5px); /* Chrome, Safari, Opera */
 		transform: translateY(-5px);
+	}
+	svg path {
+		fill: #444;
+	}
+	svg circle {
+		stroke: #444;
 	}
 	.page-content {
 		padding-top: 0;
@@ -98,7 +111,17 @@ description: Hayden Elza - Forester and GIS Specialist
 		line-height: 1.5;
 		padding-left: 0.5em;
 		padding-top: 0.25em;
+		-webkit-transition: background 0.2s linear;
+		-moz-transition: background 0.2s linear;
+		-o-transition: background 0.2s linear;
+		transition: background 0.2s linear;
 	}
+	/*.horizontal-bar::after {
+		content: attr(data-percent);
+		float: right;
+		padding-right: 0.5em;
+		color: #808080;
+	}*/
 	.horizontal-bar:hover {
 		background: black;
 	}
@@ -155,6 +178,10 @@ description: Hayden Elza - Forester and GIS Specialist
 		-webkit-filter: grayscale(0);
 		-moz-filter: grayscale(0);
 		filter: grayscale(0);
+		-webkit-transition: all 0.2s linear;
+		-moz-transition: all 0.2s linear;
+		-o-transition: all 0.2s linear;
+		transition: all 0.2s linear;
 	}
 	.project img.wide {
 		max-width: 100%;
@@ -251,7 +278,7 @@ description: Hayden Elza - Forester and GIS Specialist
 </style>
 
 <!-- Intro -->
-<div class="section">
+<div id="Intro" class="section">
 	<div class="left-margin"></div>
 	<div class="section-content">
 		<div class="social-icons">
@@ -268,38 +295,37 @@ description: Hayden Elza - Forester and GIS Specialist
 </div>
 
 <!-- Skills -->
-<div class="section">
+<div id="Skills" class="section">
 	<div class="left-margin"></div>
 	<div class="section-content">
 		<div class="section-title">Skills</div>
 		<div class="horizontal-bar-chart">
-			<div class="horizontal-bar" data-percent="95%">Python</div>
-			<div class="horizontal-bar" data-percent="60%">Bash</div>
-			<div class="horizontal-bar" data-percent="30%">R</div>
-			<div class="horizontal-bar" data-percent="65%">Java Script</div>
-			<div class="horizontal-bar" data-percent="80%">CSS</div>
-			<div class="horizontal-bar" data-percent="80%">HTML</div>
-			<div class="horizontal-bar" data-percent="75%">SQL</div>
-			<div class="horizontal-bar" data-percent="85%">GDAL/OGR</div>
-			<div class="horizontal-bar" data-percent="95%">ArcGIS</div>
-			<div class="horizontal-bar" data-percent="75%">Quantum GIS</div>
-			<div class="horizontal-bar" data-percent="35%">Tomcat</div>
-			<div class="horizontal-bar" data-percent="30%">Solr</div>
-			<div class="horizontal-bar" data-percent="75%">GeoServer</div>
-			<div class="horizontal-bar" data-percent="70%">GeoNetwork</div>
-			<div class="horizontal-bar" data-percent="80%">PostGIS</div>
-			<div class="horizontal-bar" data-percent="80%">PostgreSQL</div>
-			<div class="horizontal-bar" data-percent="90%">Linux</div>
-			<div class="horizontal-bar" data-percent="65%">Microsoft Servers</div>
-			<div class="horizontal-bar" data-percent="95%">Microsoft Office Suit</div>
-			<div class="horizontal-bar" data-percent="65%">Illustrator</div>
-			<div class="horizontal-bar" data-percent="80%">Photoshop</div>
+			<div class="horizontal-bar" data-percent="100%"><span>Python</span></div>
+			<div class="horizontal-bar" data-percent="60%"><span>Bash</span></div>
+			<div class="horizontal-bar" data-percent="40%"><span>R</span></div>
+			<div class="horizontal-bar" data-percent="65%"><span>Java Script</span></div>
+			<div class="horizontal-bar" data-percent="90%"><span>HTML + CSS</span></div>
+			<div class="horizontal-bar" data-percent="75%"><span>SQL</span></div>
+			<div class="horizontal-bar" data-percent="85%"><span>GDAL/OGR</span></div>
+			<div class="horizontal-bar" data-percent="95%"><span>ArcGIS</span></div>
+			<div class="horizontal-bar" data-percent="75%"><span>Quantum GIS</span></div>
+			<div class="horizontal-bar" data-percent="45%"><span>Tomcat</span></div>
+			<div class="horizontal-bar" data-percent="40%"><span>Solr</span></div>
+			<div class="horizontal-bar" data-percent="75%"><span>GeoServer</span></div>
+			<div class="horizontal-bar" data-percent="70%"><span>GeoNetwork</span></div>
+			<div class="horizontal-bar" data-percent="80%"><span>PostGIS</span></div>
+			<div class="horizontal-bar" data-percent="80%"><span>PostgreSQL</span></div>
+			<div class="horizontal-bar" data-percent="95%"><span>Linux</span></div>
+			<div class="horizontal-bar" data-percent="65%"><span>Microsoft Servers</span></div>
+			<div class="horizontal-bar" data-percent="100%"><span>Microsoft Office Suit</span></div>
+			<div class="horizontal-bar" data-percent="65%"><span>Illustrator</span></div>
+			<div class="horizontal-bar" data-percent="80%"><span>Photoshop</span></div>
 		</div>	
 	</div>
 </div>
 
 <!-- Experience -->
-<div class="section">
+<div id="Experience" class="section">
 	<div class="left-margin"></div>
 	<div class="section-content">
 		<div class="section-title">Experience</div>
@@ -331,7 +357,7 @@ description: Hayden Elza - Forester and GIS Specialist
 </div>
 
 <!-- Education -->
-<div class="section">
+<div id="Education" class="section">
 	<div class="left-margin"></div>
 	<div class="section-content">
 		<div class="section-title">Education</div>
@@ -363,7 +389,7 @@ description: Hayden Elza - Forester and GIS Specialist
 </div>
 
 <!-- Projects -->
-<div class="section">
+<div id="Projects" class="section">
 	<div class="left-margin"></div>
 	<div class="section-content">
 		<div class="section-title">Projects</div>
@@ -379,7 +405,7 @@ description: Hayden Elza - Forester and GIS Specialist
 </div>
 
 <!-- Certification -->
-<div class="section">
+<div id="Certification" class="section">
 	<div class="left-margin"></div>
 	<div class="section-content">
 		<div class="section-title">Certification</div>
@@ -391,7 +417,7 @@ description: Hayden Elza - Forester and GIS Specialist
 </div>
 
 <!-- Activities -->
-<div class="section">
+<div id="Activities" class="section">
 	<div class="left-margin"></div>
 	<div class="section-content">
 		<div class="section-title">Activities</div>
@@ -420,7 +446,7 @@ description: Hayden Elza - Forester and GIS Specialist
 </div>
 
 <!-- Contact -->
-<div class="section">
+<div id="Contact" class="section">
 	<div class="left-margin"></div>
 	<div class="section-content">
 		<div class="section-title">Contact</div>
@@ -447,11 +473,13 @@ description: Hayden Elza - Forester and GIS Specialist
 	// Skill bar animation
 	var timeBars = 0;
 	$(document).ready(function(){
+		// Animate bars
 		$('.horizontal-bar').each(function(){
 			var that = $(this);
 			setTimeout(function(){that.animate({width:that.attr('data-percent')},1000)}, timeBars);
 			timeBars += 25
 		});
+
 	});
 
 	// Project animation when scrolled to

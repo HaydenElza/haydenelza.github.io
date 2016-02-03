@@ -233,11 +233,11 @@ a.page-link:hover:before{
 }
 
 /* Logo hover animation */
-.site-title img{
+.site-title svg{
   -webkit-transition: -webkit-transform .2s ease-in-out;
   transition: transform .2s ease-in-out;
 }
-.site-title img:hover{
+.site-title svg:hover{
   -webkit-transform: rotate(15deg);
   transform: rotate(15deg);
 }
