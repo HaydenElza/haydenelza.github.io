@@ -5,13 +5,15 @@ permalink: /portfolio/
 description: Check out some of my work.
 ---
 
-### Posters
+## Maps
 
 [![Wisconsin Wetlands Loss](/assets/img/portfolio/HaydenElza-WetlandsLoss-Preview.png)](/assets/img/portfolio/HaydenElza-WetlandsLoss.png)
 
 [![Corruption in EU](/assets/img/portfolio/HaydenElza-CorruptionInTheEU-Preview.png)](/assets/img/portfolio/HaydenElza-CorruptionInTheEU.png)
 
-### Forestry
+[![Neitzke Property](/assets/img/portfolio/Neitzke_Property.png)](/assets/img/portfolio/Neitzke_Property.png)
+
+## Forestry
 
 [![Heterobasidion Risk Assessment](/assets/img/portfolio/HeterobasidionRiskAssessment-Preview.png)](/assets/img/portfolio/HeterobasidionRiskAssessment-100dpi.png)
 
@@ -19,7 +21,9 @@ description: Check out some of my work.
 
 <a href="/assets/img/portfolio/GrunowHarvest.jpg"><img src="/assets/img/portfolio/GrunowHarvest.jpg" atl="Grunow Property Management Plan - Harvest Plan" width="312.5" height="470"></a>
 
-### Student Research
+## Student Research
+
+[Spatial Distribution of Forest Research in the Conterminous United States (Spring 2015)](/assets/pdf/Elza_Kochaver_Moriarty_2015-Spatial_Distribution_of Forest_Research.pdf)
 
 [UW Forestry Capstone Project - Grunow Property Management Plan (Fall 2013)](/assets/pdf/Capstone_2013_FinalDraft.pdf)
 
