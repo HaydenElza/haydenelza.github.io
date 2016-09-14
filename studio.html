@@ -23,7 +23,12 @@
 	<nav class="grey darken-4">
 		<div class="nav-wrapper">
 			<a href="#" class="brand-logo" style="padding-left: 10px;">1917 Monroe St. #305</a>
+			<a href="#" data-activates="mobile-menu" class="button-collapse"><i class="material-icons">menu</i></a>
 			<ul id="nav-mobile" class="right hide-on-med-and-down">
+				<li><a href="/assets/1917Monroe/RentalApplication.pdf">Application Form</a></li>
+				<li><a href="#contact" class="modal-trigger">Contact</a></li>
+			</ul>
+			<ul class="side-nav" id="mobile-menu">
 				<li><a href="/assets/1917Monroe/RentalApplication.pdf">Application Form</a></li>
 				<li><a href="#contact" class="modal-trigger">Contact</a></li>
 			</ul>
@@ -62,6 +67,7 @@
 		</div>
 		<br><br><br><br><br><br><br><br><br><br>
 		<img class="materialboxed header-img" src="/assets/1917Monroe/Studio.jpg" width="50%">
+		<br><br><br><br>
 	</div>
 	<div id="contact" class="modal">
 		<div class="modal-content">
@@ -73,14 +79,6 @@
 		</div>
 	</div>
 
-
-
-
-
-
-
-
-
 	<script>
 		$(document).ready(function(){
 			$('.carousel').carousel({dist: -50});
@@ -88,10 +86,10 @@
 		$(document).ready(function(){
 			$('.materialboxed').materialbox();
 		});
-
 		$(document).ready(function(){
 			$('.modal-trigger').leanModal();
 		});
+		$(".button-collapse").sideNav();
 	</script>
 </body>
 </html>
