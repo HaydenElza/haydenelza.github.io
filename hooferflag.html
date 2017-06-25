@@ -91,7 +91,7 @@ description: Hoofer Sailing flag history and Hoofer flag change notifications.
 
 			// Flag history
 			var htmlString = "<table>";
-			for (var i=0,  dataLen=data.length; i < dataLen; i++) {
+			for (var i=0,  dataLen=(data.length)>15?15:data.length; i < dataLen; i++) {
 				var flagColor = data[i]['Flag Color'];
 				var lastUpdated = new Date(data[i]['Last Updated'].replace(/\ \d:/g,function(x){ return ' 0'+x.substr(1,2)}).replace(/ /g,'T')+'Z');
 				var htmlString = htmlString.concat('<tr><td>', data[i]['Flag Color'], "</td><td>", lastUpdated.toDateString()+" "+lastUpdated.toTimeString(), '</td></tr>');
