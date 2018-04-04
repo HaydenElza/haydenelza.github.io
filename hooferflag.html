@@ -12,8 +12,10 @@ description: Hoofer Sailing flag history and Hoofer flag change notifications.
 			padding: 0;
 		}
 		body {
-			text-align: center;
+			
 			font-family: Helvetica, Arial, sans-serif;
+			max-width: 547px;
+			margin: auto;
 		}
 		h1 {
 			margin-top: 2em;
@@ -23,15 +25,30 @@ description: Hoofer Sailing flag history and Hoofer flag change notifications.
 			list-style: none;
 		}
 		table {
-			margin: 1.5em auto;
+			margin: 2em auto;
 			border-spacing: 15px 0;
 			font-family: monospace;
 		}
 		td {
 			padding: 2px;
+			vertical-align: top; 
+		}
+		#current-flag {
+			text-align: center;
+			vertical-align: middle;
+		}
+		#current-conditions {
+			border-collapse: collapse;
+		}
+		#current-conditions tr td:nth-child(even) {
+			padding-left: 15px;
+		}
+		#flag-definitions tr td:nth-child(odd) {
+			display: table-cell;
 		}
 		#notify-button {
 			text-decoration: none;
+			text-align: center;
 			background: #ec7770;
 			color: white;
 			padding: 2em;
@@ -46,15 +63,58 @@ description: Hoofer Sailing flag history and Hoofer flag change notifications.
 	</style>
 </head>
 <body>
-	<h1>Hoofer Flag History</h1>
-	<div id="current-flag"></div>
-	<div id="flag-history"></div>
-	<a href="http://hoofersailing.org/?q=instruction/safety/flags">Flag Definitions</a>
-	<h1>Hoofer Flag Change Notifications</h1>
-	<p><a id='notify-button' href='https://goo.gl/forms/kic0i1AuJH4X3IMc2'>Temporary Flag Change Notifications</a></p>
-	<p>Send email notifications to your device to let you know when a flag has change.</p>
-	<p>Great for knowing when the weather clears or for warnings to head back.<br>Choose to receive notifications for however many hours or minutes you would like.</p>
+	<table>
+		<tr><td>
+			<h1>Hoofer Flag</h1>
+		</td></tr>
+		<tr><td>
+			<p>Hoofer Sailing Club current flag and conditions, flag history, and flag change notifications.</p>
+		</td></tr>
+	</table>
 
+	<table>
+		<tr><td colspan="2">
+			<h1>Current Flag and Conditions</h1>
+		</td></tr>
+		<tr>
+			<td id="current-flag"></td>
+			<td>
+				<table id="current-conditions"></table>
+			</td>
+		</tr>
+	</table>
+
+	<table id="flag-history">
+		<tr><td colspan="2">
+			<h1>Flag History</h1>
+		</td></tr>
+	</table>
+
+	<table id="flag-definitions">
+		<tr><td colspan="2">
+			<h1>Flag Definitions</h1>
+		</td></tr>
+		<tr><td><b>green</b></td><td>Winds approx. 0-18 mph. Sailors with a light weather rating may sail.</td></tr>
+		<tr><td><b>blue</b></td><td>Winds approx. 18-30 mph. Sailors with a heavy weather rating may sail.</td></tr>
+		<tr><td><b>yellow</b></td><td>Cautionary flag requires sailors to stay within the yellow line area which is an imaginary line running from the tip of Picnic Point to the red and white Oscar Meyer smoke stack.</td></tr>
+		<tr><td nowrap><b>blue-red</b></td><td>Winds over 30 mph. Yellow line in effect. Limited craft allowed out.</td></tr>
+		<tr><td><b>red</b></td><td>Lake is closed. Storm approaching - return to Hoofers ASAP. No sailing equipment is allowed out.</td></tr>
+		<tr><td><b>none</b></td><td>Lifesaving Station is not open. Lake is closed for Hoofer sailors.</td></tr>
+	</table>
+	
+	<!--<a href="http://hoofersailing.org/?q=instruction/safety/flags">Flag Definitions</a>-->
+
+	<table>
+		<tr><td colspan="2">
+			<h1>Hoofer Flag Change Notifications</h1>
+		</td></tr>
+		<tr>
+			<td width="200px"><a id='notify-button' href='https://goo.gl/forms/kic0i1AuJH4X3IMc2'>Temporary Flag Change Notifications</a></td>
+			<td>Send email notifications to your device to let you know when a flag has change.</td>
+		</tr>
+	</table>
+	
+	
 
 	<script src="https://flel.github.io/js/jquery.min.js"></script>
 	<script src='https://flel.github.io/js/tabletop.min.js'></script>
@@ -71,6 +131,30 @@ description: Hoofer Sailing flag history and Hoofer flag change notifications.
 			} )
 		}
 
+		function fetchData() {
+			// Fetch data
+			
+
+			// Process response to object
+			var json = response.getContentText().replace(/\(|\)|;/g, '');
+			var data = JSON.parse(json);
+
+			// Return the flag color and date updated
+			return {
+				retrieved: data.Retrieved.substring(5,18),
+				foundBuoy: data.FoundBuoy,
+				foundFlag: data.FoundFlag,
+				foundWeather: data.FoundWeather,
+				waterTemp: data.WaterTemp,
+				flag: data.Flag,
+				sunset: data.SunsetHour + "." + data.SunsetMinute,
+				wind: data.WindMph + "mph " + data.WindDir + " (" + data.WindDegrees + "°)",
+				temp: data.TempF + "°F (" + data.TempC + "°C)",
+				forecast: data.Forecast,
+				forecastIcon: data.ForecastIcon
+			};
+		};
+
 		function fillFlags(data, tabletop) {
 			var flagImageKey = {
 				'green': 'GreenFlag.png',
@@ -85,20 +169,51 @@ description: Hoofer Sailing flag history and Hoofer flag change notifications.
 			};
 
 			// Current Flag
-			var htmlString = "<img src='https://www.ehs.wisc.edu/lake/"
+			var htmlString = "<img src='https://ehs.wisc.edu/wp-content/themes/uw-theme-child-ehs/assets/images/"
 			var htmlString = htmlString.concat(flagImageKey[data[0]['Flag Color'].toLowerCase()], "'/><br><b>Current flag: ", data[0]['Flag Color'],"</b>");
 			$('#current-flag').html(htmlString);
 
+			
+
 			// Flag history
-			var htmlString = "<table>";
 			for (var i=0,  dataLen=(data.length)>15?15:data.length; i < dataLen; i++) {
 				var flagColor = data[i]['Flag Color'];
 				var lastUpdated = new Date(data[i]['Last Updated'].replace(/\ \d:/g,function(x){ return ' 0'+x.substr(1,2)}).replace(/ /g,'T')+'Z');
-				var htmlString = htmlString.concat('<tr><td>', data[i]['Flag Color'], "</td><td>", lastUpdated.toDateString()+" "+lastUpdated.toTimeString(), '</td></tr>');
+				$('#flag-history').append('<tr><td>'+data[i]['Flag Color']+"</td><td>"+lastUpdated.toDateString()+" "+lastUpdated.toTimeString()+'</td></tr>');
 			}
-			var htmlString = htmlString.concat('</table>');
-			$('#flag-history').html(htmlString);
+			$('#flag-history').append('<a href="https://docs.google.com/spreadsheets/d/1gtrfO23I4Ph_byR8x0QiJi1QmyFofVsK5LuAE-6TF1A/edit?usp=sharing">view full</a>')
 		}
+
+		// Current Conditions
+		$.ajax({
+			cache: true,
+			dataType: 'jsonp',
+			url: 'https://endpoints.wams.doit.wisc.edu/ehs.wisc.edu/LakeConditions/Api/',
+			success: showData,
+			error: wuFailed
+		});
+
+		function showData(data) {
+			// Fill Current Conditions
+			if (data.FoundBuoy) {
+				$('#current-conditions').append("<tr><td>Water Temp</td><td>"+data.WaterTemp+"</td></tr>");
+			} else {
+				$('#current-conditions').append('<tr><td colspan="2">Buoy not found.</td></tr>');
+			}
+			if (data.FoundWeather) {
+				$('#current-conditions').append("<tr><td>Sunset</td><td>"+data.SunsetHour+"."+data.SunsetMinute+"</td></tr>");
+				$('#current-conditions').append("<tr><td>Wind</td><td>"+data.WindMph+"mph "+data.WindDir+" ("+data.WindDegrees+"°)"+"</td></tr>");
+				$('#current-conditions').append("<tr><td>Air Temp</td><td>"+data.TempF+"°F ("+data.TempC+"°C)"+"</td></tr>");
+				$('#current-conditions').append("<tr><td>Forecast</td><td>"+data.Forecast+"</td></tr>");
+			} else {
+				$('#current-conditions').append("<tr><td>Weather not found.</td><td>");
+			}
+		}
+
+		function wuFailed() {
+			$('#current-conditions').append("<tr><td>Data could not be retireved from life saving station.</td><td>");
+		}
+
 	</script>
 </body>
 </html>
