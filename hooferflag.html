@@ -126,55 +126,12 @@ description: Hoofer Sailing flag history and Hoofer flag change notifications.
 				key: '1gtrfO23I4Ph_byR8x0QiJi1QmyFofVsK5LuAE-6TF1A',
 				orderby: 'lastupdated',
 				reverse: true,
-				callback: fillFlags,
+				callback: fillHistory,
 				simpleSheet: true 
 			} )
 		}
 
-		function fetchData() {
-			// Fetch data
-			
-
-			// Process response to object
-			var json = response.getContentText().replace(/\(|\)|;/g, '');
-			var data = JSON.parse(json);
-
-			// Return the flag color and date updated
-			return {
-				retrieved: data.Retrieved.substring(5,18),
-				foundBuoy: data.FoundBuoy,
-				foundFlag: data.FoundFlag,
-				foundWeather: data.FoundWeather,
-				waterTemp: data.WaterTemp,
-				flag: data.Flag,
-				sunset: data.SunsetHour + "." + data.SunsetMinute,
-				wind: data.WindMph + "mph " + data.WindDir + " (" + data.WindDegrees + "°)",
-				temp: data.TempF + "°F (" + data.TempC + "°C)",
-				forecast: data.Forecast,
-				forecastIcon: data.ForecastIcon
-			};
-		};
-
-		function fillFlags(data, tabletop) {
-			var flagImageKey = {
-				'green': 'GreenFlag.png',
-				'green-yellow': 'GreenYellowFlag.png',
-				'blue': 'BlueFlag.png',
-				'blue-yellow':'BlueYellowFlag.png',
-				'tango': 'TangoFlag.png',
-				'tango-yellow': 'TangoYellowFlag.png',
-				'blue-red': 'BlueRedFlag.png',
-				'red': 'RedFlag.png',
-				'none': 'Closed.png'
-			};
-
-			// Current Flag
-			var htmlString = "<img src='https://ehs.wisc.edu/wp-content/themes/uw-theme-child-ehs/assets/images/"
-			var htmlString = htmlString.concat(flagImageKey[data[0]['Flag Color'].toLowerCase()], "'/><br><b>Current flag: ", data[0]['Flag Color'],"</b>");
-			$('#current-flag').html(htmlString);
-
-			
-
+		function fillHistory(data, tabletop) {
 			// Flag history
 			for (var i=0,  dataLen=(data.length)>15?15:data.length; i < dataLen; i++) {
 				var flagColor = data[i]['Flag Color'];
@@ -194,6 +151,21 @@ description: Hoofer Sailing flag history and Hoofer flag change notifications.
 		});
 
 		function showData(data) {
+			var flagImageKey = {
+				'green': 'GreenFlag.png',
+				'green-yellow': 'GreenYellowFlag.png',
+				'blue': 'BlueFlag.png',
+				'blue-yellow':'BlueYellowFlag.png',
+				'tango': 'TangoFlag.png',
+				'tango-yellow': 'TangoYellowFlag.png',
+				'blue-red': 'BlueRedFlag.png',
+				'red': 'RedFlag.png',
+				'none': 'Closed.png'
+			};
+
+			// Current Flag
+			$('#current-flag').append("<img src='https://ehs.wisc.edu/wp-content/themes/uw-theme-child-ehs/assets/images/"+flagImageKey[data.Flag.toLowerCase()]+"'/><br><b>Current flag: "+data.Flag+"</b>");
+
 			// Fill Current Conditions
 			if (data.FoundBuoy) {
 				$('#current-conditions').append("<tr><td>Water Temp</td><td>"+data.WaterTemp+"</td></tr>");
