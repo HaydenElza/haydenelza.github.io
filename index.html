@@ -498,7 +498,7 @@ description: Just a rural Wisconsinite making his way through the world solving 
 	<div class="left-margin"></div>
 	<div class="section-content">
 		<div class="section-title">Contact</div>
-		<form action="mailto:forms.elza@gmail.com?subject=Message via elza.me" enctype="text/plain" method="post">
+		<form action="https://formspree.io/forms.elza@gmail.com" method="post">
 			<div class="form-line">
 				<input id="name" name="name" type="text" placeholder="Name" required>
 			</div>
@@ -508,10 +508,14 @@ description: Just a rural Wisconsinite making his way through the world solving 
 			<div class="form-line">
 				<textarea id="message" name="message" type="text" placeholder="Type your message here." required></textarea>
 			</div>
+			<input type="hidden" name="_subject" value="Message from Contact Form" />
+			<input type="text" name="_gotcha" style="display:none" />
+			<input type="hidden" name="_next" value="https://elza.me" />
 			<input type="submit" value="Submit">
 		</form>
 	</div>
 </div>
+
 <br><br><br>
 <div class="footer" style="text-align: center; font-size: 0.83em; padding-left: 5.25em; padding-bottom: 0.75em;">&copy; 2017 Hayden Elza.  All rights reserved.</div>
 
