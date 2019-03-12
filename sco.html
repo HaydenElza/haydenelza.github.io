@@ -1,0 +1,389 @@
+---
+layout: index
+title: GIS Developer and Forester - Personal Site
+description: Just a rural Wisconsinite making his way through the world solving life's riddles as they come.
+---
+
+<style>
+	::selection {
+		color: white;
+		background: #FF5050;
+	}
+	.site-nav .page-link {
+		color: #444;
+	}
+	a.page-link:hover {
+		color: #444;
+	}
+	a.page-link:before {
+		background-color: #444;
+	}
+	body {
+		background: url(/assets/img/backgrounds/gray_jean.png);
+		color: #444;
+	}
+	.socmed-icons a svg {
+		height: 1.75em;
+		-webkit-transition: all 0.3s ease-in-out; /** Chrome & Safari **/
+		-moz-transition: all 0.3s ease-in-out; /** Firefox **/
+		-o-transition: all 0.3s ease-in-out; /** Opera **/
+		transition: all 0.3s ease-in-out;
+	}
+	.socmed-icons a svg:hover {
+		-ms-transform: translateY(-5px); /* IE 9 */
+		-webkit-transform: translateY(-5px); /* Chrome, Safari, Opera */
+		transform: translateY(-5px);
+	}
+	svg path {
+		fill: #444;
+	}
+	svg circle {
+		stroke: #444;
+	}
+	.page-content {
+		padding-top: 0;
+		padding-bottom: 5.25em;
+	}
+	.section:first-of-type {
+		margin-top: 5.25em;
+		padding-top: 5.25em;
+	}
+	.site-header, .wrapper {
+		background: white; 
+	}
+	.wrapper {
+		padding-left: 0;
+		padding-right: 5.25em;
+		box-shadow: 0 1px 3px rgba(0,0,0,.1);
+		border-radius: 2px;
+	}
+	header .wrapper {
+		box-shadow: none;
+	}
+	.site-nav {
+		margin-right: -5.25em;
+	}
+
+	.section {
+		margin-top: 4.5em;
+	}
+	.left-margin {
+		position: relative;
+		background: #444;
+		width: 4.5em;
+		float: left;
+		height: 1.75em;
+		border-radius: 1px;
+	}
+	.left-margin:after {
+		content: '';
+		position: absolute;
+		margin-top: 0.33em;
+		margin-left: -1em;
+		height: 1.75em;
+		width: 1em;
+		background: #555;
+		border-radius: 2px 0 0 0;
+		-webkit-transform: skew(0deg, -30deg);
+		-moz-transform: skew(0deg, -30deg);
+		-ms-transform: skew(0deg, -30deg);
+		-o-transform: skew(0deg, -30deg);
+		transform: skew(0deg, -30deg);
+	}
+	.left-margin:before {
+		content: '';
+		position: absolute;
+		margin-top: 1em;
+		margin-left: -1em;
+		height: 1.75em;
+		width: 1em;
+		background: #333;
+		border-radius: 2px 0 0 2px;
+		-webkit-transform: skew(0deg, 30deg);
+		-moz-transform: skew(0deg, 30deg);
+		-ms-transform: skew(0deg, 30deg);
+		-o-transform: skew(0deg, 30deg);
+		transform: skew(0deg, 30deg);
+	}
+	.section-content {
+		margin-left: 4.5em;
+		padding-left: 0.75em;
+	}
+	.section-title {
+		font-size: 1.75em;
+		text-transform: uppercase;
+		line-height: 1;
+	}
+	.socmed-icons {
+		float: right;
+	}
+	.socmed-icons img {
+		
+	}
+	.section-subtitle {
+		line-height: 1;
+		margin-top: 0.25em;
+	}
+	.text-box {
+		margin-top: 0.75em;
+		border-left: solid #444 0.25em;
+		padding: 0.75em;
+		font-size: 0.85em;
+	}
+
+	.horizontal-bar-chart {
+		padding-top: 0.75em;
+	}
+	.horizontal-bar {
+		margin-top: 0.25em;
+		height: 1.75em;
+		width: 0px;
+		border-radius: 2px;
+		background: #444;
+		font-size: 0.65em;
+		color: white;
+		text-transform: uppercase;
+		line-height: 1.5;
+		padding-left: 0.5em;
+		padding-top: 0.25em;
+		-webkit-transition: background 0.2s linear;
+		-moz-transition: background 0.2s linear;
+		-o-transition: background 0.2s linear;
+		transition: background 0.2s linear;
+	}
+	/*.horizontal-bar::after {
+		content: attr(data-percent);
+		float: right;
+		padding-right: 0.5em;
+		color: #808080;
+	}*/
+	.horizontal-bar:hover {
+		background: black;
+	}
+
+	.list-item {
+		margin-top: 2em;
+		overflow: auto;
+	}
+	.list-head {
+		float: left;
+		width: 20rem;
+		font-size: 0.93em;
+	}
+	.list-title {
+		font-weight: bold;
+	}
+	.list-subtitle {
+
+	}
+	.list-date {
+		font-style: italic;
+		font-size: 0.83em;
+	}
+	.list-description {
+		margin-left: 20rem;
+		padding-left: 0.75em;
+		font-size: 0.83em;
+	}
+
+	.project-container {
+		margin-top: 0.75em;
+		display: inline-block;
+	}
+	.project {
+		float: left;
+		width: Calc((100% - 2em) / 3);
+		border-radius: 2px;
+		margin-right: 1em;
+		margin-bottom: 1em;
+		opacity: 0;
+	}
+	.project:nth-child(3n) {
+		margin-right: 0;
+	}
+	.project:nth-last-child(-n+3) {
+		margin-bottom: 0;
+	}
+	.project img {
+		-webkit-filter: grayscale(1);
+		-moz-filter: grayscale(1);
+		filter: grayscale(1);
+		-webkit-transition: all 0.2s linear;
+		-moz-transition: all 0.2s linear;
+		-o-transition: all 0.2s linear;
+		transition: all 0.2s linear;
+		max-height: 9em;
+	}
+	.project img:hover {
+		-webkit-filter: grayscale(0);
+		-moz-filter: grayscale(0);
+		filter: grayscale(0);
+		transition: box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+		box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.26);
+	}
+	.project img.wide {
+		max-width: 100%;
+		max-height: 100%;
+		height: auto;
+	}
+	.project img.tall {
+		max-height: 100%;
+		max-width: 100%;
+		width: auto;
+	}​
+	
+	.form-line {
+		width: 100%;
+		margin-top: 0.75em;
+	}
+	input[type=text], input[type=email], textarea {
+		width: 100%;
+		padding: 0.75em;
+		margin: 0.75em 0;
+		border: none;
+		border-left: solid #444 0.25em;
+		background: none;
+		box-sizing: border-box;
+		font-family: Helvetica, Arial, sans-serif;
+		font-size: 0.83em;
+	}
+	textarea {
+		resize: vertical;
+	}
+	input[type=submit] {
+		color: #444;
+		background: none;
+		border: none;
+		border-left: solid #444 0.25em;
+		border-right: solid #444 0.25em;
+		padding: 0.25em 0.75em 0.25em 0.75em;
+		text-decoration: none;
+		cursor: pointer;
+		-webkit-transition: padding-left 0.4s, padding-right 0.4s; /* Safari */
+		transition: padding-left 0.4s, padding-right 0.4s;
+	}
+	input[type=submit]:hover {
+		padding-left: 1.75em;
+		padding-right: 1.75em;
+	}
+
+	@media screen and (max-width: 750px) {
+		html {
+			min-width: 320px;
+		}
+		.site-nav {
+			margin-right: 0;
+		}
+		header .wrapper {
+			padding-left: 0.75em;
+		}
+		.wrapper {
+			padding-right: 0.75em;
+		}
+		.page-content {
+			padding-bottom: 0;
+		}
+		.left-margin {
+			display: none;
+		}
+		.section:first-of-type {
+			margin-top: 0;
+		}
+		.section-content {
+			margin-left: 0;
+		}
+		.list-head{
+			float: none;
+		}
+		.list-description {
+			margin: 0;
+			padding: 0.75em 0 0 0;
+		}
+		.project {
+			float: left;
+			width: Calc((100% - 1em) / 2);
+			border-radius: 2px;
+			margin-right: 1em !important;
+			margin-bottom: 1em !important;
+			opacity: 0;
+		}
+		.project:nth-child(2n+2) {
+			margin-right: 0 !important;
+		}
+		.project:nth-last-child(-n+2) {
+			margin-bottom: 0 !important;
+		}
+	}
+	
+</style>
+
+
+<!-- Projects -->
+<div id="Projects" class="section">
+	<div class="left-margin"></div>
+	<div class="section-content">
+		<div class="section-title">Portfolio</div>
+		<div class="project-container">
+			<div class="project"><a href="https://sampleplotter.com"><img src="/assets/img/projects/sampleplotter.png"></a></div>
+			<div class="project"><a href="https://maps.aqua.wisc.edu/opengeoportal"><img src="/assets/img/projects/ogp.png"></a></div>
+			<div class="project"><a href="https://i.imgur.com/31kX4Cn.jpg"><img src="https://i.imgur.com/31kX4Cnl.jpg"></a></div>
+		</div>
+	</div>
+</div>
+
+
+<br><br><br>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript">
+	/*
+	// Skill bar animation
+	var timeBars = 0;
+	$(document).ready(function(){
+		// Animate bars
+		$('.horizontal-bar').each(function(){
+			var that = $(this);
+			setTimeout(function(){that.animate({width:that.attr('data-percent')},1000)}, timeBars);
+			timeBars += 25
+		});
+
+	});*/
+
+	// Project animation when scrolled to
+	$(document).ready(function() {
+
+		/* Every time the window is scrolled ... */
+		$(window).scroll( function(){
+
+			/* Check the location of each desired element */
+			$('.horizontal-bar-chart').each( function(i){
+				
+				var top_of_object = $(this).offset().top;
+				var bottom_of_window = $(window).scrollTop() + $(window).height();
+				
+				/* If the object is completely visible in the window, fade it it */
+				if( (bottom_of_window > top_of_object) && (typeof timeBars === 'undefined') ){
+					timeBars = 0;
+					// Animate bars
+					$('.horizontal-bar').each(function(){
+						var that = $(this);
+						setTimeout(function(){that.animate({width:that.attr('data-percent')},1000)}, timeBars);
+						timeBars += 25
+					});
+
+				}
+			});
+		});
+	});
+
+	//Project tile animation
+	var timeProjects = 0;
+	$(document).ready(function(){
+		$('.project').each(function(){
+			var that = $(this);
+			setTimeout(function(){that.animate({opacity:1},1000)}, timeProjects);
+			timeProjects += 300
+		});
+	});
+
+</script>
