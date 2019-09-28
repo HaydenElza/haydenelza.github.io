@@ -34,6 +34,13 @@ description: Just a rural Wisconsinite making his way through the world solving 
 		-webkit-transform: translateY(-5px); /* Chrome, Safari, Opera */
 		transform: translateY(-5px);
 	}
+	.socmed-icons a svg:hover path {
+		-webkit-transition: all 0.3s ease-in-out; /** Chrome & Safari **/
+		-moz-transition: all 0.3s ease-in-out; /** Firefox **/
+		-o-transition: all 0.3s ease-in-out; /** Opera **/
+		transition: all 0.3s ease-in-out;
+		fill: #ef0075;
+	}
 	svg path {
 		fill: #444;
 	}
@@ -117,9 +124,7 @@ description: Just a rural Wisconsinite making his way through the world solving 
 	.socmed-icons {
 		float: right;
 	}
-	.socmed-icons img {
-		
-	}
+	
 	.section-subtitle {
 		line-height: 1;
 		margin-top: 0.25em;
