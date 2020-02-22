@@ -7,7 +7,7 @@ description: Just a rural Wisconsinite making his way through the world solving 
 <style>
 	::selection {
 		color: white;
-		background: #FF5050;
+		background: #ef0075;
 	}
 	.site-nav .page-link {
 		color: #444;
@@ -151,10 +151,10 @@ description: Just a rural Wisconsinite making his way through the world solving 
 		line-height: 1.5;
 		padding-left: 0.5em;
 		padding-top: 0.25em;
-		-webkit-transition: background 0.2s linear;
-		-moz-transition: background 0.2s linear;
-		-o-transition: background 0.2s linear;
-		transition: background 0.2s linear;
+		-webkit-transition: background 0.1s ease-in-out;
+		-moz-transition: background 0.1s ease-in-out;
+		-o-transition: background 0.1s ease-in-out;
+		transition: background 0.1s ease-in-out;
 	}
 	/*.horizontal-bar::after {
 		content: attr(data-percent);
@@ -163,7 +163,7 @@ description: Just a rural Wisconsinite making his way through the world solving 
 		color: #808080;
 	}*/
 	.horizontal-bar:hover {
-		background: black;
+		background: #ef0075;
 	}
 
 	.list-item {
@@ -184,6 +184,14 @@ description: Just a rural Wisconsinite making his way through the world solving 
 	.list-date {
 		font-style: italic;
 		font-size: 0.83em;
+	}
+	.list-link a {
+		font-style: italic;
+		font-size: 0.83em;
+		color: #444;
+	}
+	.list-link a:hover {
+		color: #ef0075;
 	}
 	.list-description {
 		margin-left: 20rem;
@@ -353,6 +361,56 @@ description: Just a rural Wisconsinite making his way through the world solving 
 	</div>
 </div>
 
+<!-- PoC||GTFO -->
+<div id="PoCs" class="section">
+	<div class="left-margin"></div>
+	<div class="section-content">
+		<div class="section-title">Proof of Concepts</div>
+		<div class="list-item">
+			<div class="list-head">
+				<div class="list-title">PLSS Locator</div>
+				<div class="list-link"><a target="_blank" href="https://elza.me/plss-locator/">elza.me/plss-locator</a></div>
+			</div>
+			<div class="list-description">The PLSS Locator is a free tool to help users identify within which Public Land Survey System (PLSS) subdivisions a location resides.</div>
+		</div>
+		<div class="list-item">
+			<div class="list-head">
+				<div class="list-title">Townships General Description</div>
+				<div class="list-link"><a target="_blank" href="https://wistcart.github.io/townships-general-description/">wistcart.github.io/townships-general-description</a></div>
+			</div>
+			<div class="list-description">Web map where users can zoom around and click on township to view general land description transcribed from the orginal General Land Office (GLO) Public Land Survey (PLS).</div>
+		</div>
+		<div class="list-item">
+			<div class="list-head">
+				<div class="list-title">Where Have You Been in Wisconsin</div>
+				<div class="list-link"><a target="_blank" href="https://elza.me/where-have-you-been/">elza.me/where-have-you-been</a></div>
+			</div>
+			<div class="list-description">Map of Wisconsin where users can mark counties they have visited and choose a marker color.</div>
+		</div>
+		<div class="list-item">
+			<div class="list-head">
+				<div class="list-title">Carto Elements</div>
+				<div class="list-link"><a target="_blank" href="https://elza.me/cartoelements/">elza.me/cartoelements</a></div>
+			</div>
+			<div class="list-description">A collection of north arrows, scale bars, and other cartographic elements.</div>
+		</div>
+		<!-- <div class="list-item">
+			<div class="list-head">
+				<div class="list-title">Pixel Art</div>
+				<div class="list-link"><a target="_blank" href="https://elza.me/pixel-art">elza.me/pixel-art</a></div>
+			</div>
+			<div class="list-description">Click on cells to change color. Hover and press number to select color.</div>
+		</div> -->
+		<!-- <div class="list-item">
+			<div class="list-head">
+				<div class="list-title">Nap Timer</div>
+				<div class="list-link"><a target="_blank" href="https://elza.me/nap-timer">elza.me/nap-timer</a></div>
+			</div>
+			<div class="list-description">A silent timer. Screen turns from grey to green when time is complete. Designed for early childhood educator who had a child who did not sleep during nap time but needed to sit silently on mat for five minutes before playing with toys.</div>
+		</div> -->
+	</div>
+</div>
+
 <!-- Experience -->
 <div id="Experience" class="section">
 	<div class="left-margin"></div>
@@ -495,23 +553,27 @@ description: Just a rural Wisconsinite making his way through the world solving 
 			<div class="horizontal-bar" data-percent="100%"><span>Python</span></div>
 			<div class="horizontal-bar" data-percent="60%"><span>Bash</span></div>
 			<div class="horizontal-bar" data-percent="40%"><span>R</span></div>
-			<div class="horizontal-bar" data-percent="70%"><span>Java Script</span></div>
+			<div class="horizontal-bar" data-percent="85%"><span>Java Script</span></div>
 			<div class="horizontal-bar" data-percent="90%"><span>HTML + CSS</span></div>
-			<div class="horizontal-bar" data-percent="95%"><span>SQL</span></div>
+			<div class="horizontal-bar" data-percent="100%"><span>SQL</span></div>
+			<div class="horizontal-bar" data-percent="90%"><span>Leaflet</span></div>
+			<div class="horizontal-bar" data-percent="85%"><span>turf.js</span></div>
+			<div class="horizontal-bar" data-percent="70%"><span>Carto</span></div>
 			<div class="horizontal-bar" data-percent="85%"><span>GDAL/OGR</span></div>
 			<div class="horizontal-bar" data-percent="95%"><span>ArcGIS</span></div>
 			<div class="horizontal-bar" data-percent="90%"><span>Quantum GIS</span></div>
-			<div class="horizontal-bar" data-percent="45%"><span>Tomcat</span></div>
+			<div class="horizontal-bar" data-percent="60%"><span>Tomcat</span></div>
 			<div class="horizontal-bar" data-percent="40%"><span>Solr</span></div>
-			<div class="horizontal-bar" data-percent="75%"><span>GeoServer</span></div>
-			<div class="horizontal-bar" data-percent="70%"><span>GeoNetwork</span></div>
-			<div class="horizontal-bar" data-percent="95%"><span>PostGIS</span></div>
-			<div class="horizontal-bar" data-percent="95%"><span>PostgreSQL</span></div>
+			<div class="horizontal-bar" data-percent="90%"><span>GeoServer</span></div>
+			<div class="horizontal-bar" data-percent="85%"><span>GeoNetwork</span></div>
+			<div class="horizontal-bar" data-percent="100%"><span>PostgreSQL</span></div>
+			<div class="horizontal-bar" data-percent="100%"><span>PostGIS</span></div>
 			<div class="horizontal-bar" data-percent="95%"><span>Linux</span></div>
-			<div class="horizontal-bar" data-percent="75%"><span>AWS</span></div>
+			<div class="horizontal-bar" data-percent="80%"><span>AWS</span></div>
+			<div class="horizontal-bar" data-percent="40%"><span>Docker</span></div>
 			<div class="horizontal-bar" data-percent="65%"><span>Microsoft Servers</span></div>
 			<div class="horizontal-bar" data-percent="100%"><span>Microsoft Office Suite</span></div>
-			<div class="horizontal-bar" data-percent="90%"><span>Illustrator</span></div>
+			<div class="horizontal-bar" data-percent="95%"><span>Illustrator</span></div>
 			<div class="horizontal-bar" data-percent="80%"><span>Photoshop</span></div>
 		</div>	
 	</div>
