@@ -1,0 +1,95 @@
+<html>
+    <head>
+        <title>WLIA Donations Thermometer</title>
+
+        <script src='assets/js/papaparse.min.js'></script>
+        <script
+            src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>
+
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+            }
+            #total {
+                position: inline-block;
+                text-align: center;
+                left: 50%;
+            }
+            #thermometer {
+                margin-top: 10vh;
+                width: 4rem;
+                height: calc(80vh - 3rem);
+                background-color: #c2c2c2;
+                border-radius: 0.5rem;
+                display: inline-block;
+            }
+            /* .thermometer:after {
+                content: '';
+                margin-top: calc(80vh - 6rem);
+                margin-left: -1rem;
+                height: 6rem;
+                width: 6rem;
+                background-color: #46d190;
+                border-radius: 50%;
+                display: inline-block; */
+            }
+        </style>
+    </head>
+    <body>
+        <div style="text-align:center">
+            <h2 id="total">0</h2>
+            <span id="thermometer"></span>
+        </div>
+
+        <script>
+            var data = {
+                total: function() {
+                    return
+                }
+            };
+
+            function init() {
+                // Goals
+                Papa.parse('https://docs.google.com/spreadsheets/d/e/2PACX-1vSIfYyN7ti2FNwOxvp63Ne-0UKh7aLyZ2M6BpTXbtxq48_YPv4SbmgKOlsiN5Z_VKivxX_uDaxkkmX5/pub?gid=1682016239&single=true&output=csv', {
+                    download: true,
+                    header: true,
+                    complete: function(results) {
+                        main(results.data);
+                    }
+                })
+            }
+
+            function main(data) {
+                // Donation total
+                Papa.parse('https://docs.google.com/spreadsheets/d/e/2PACX-1vSIfYyN7ti2FNwOxvp63Ne-0UKh7aLyZ2M6BpTXbtxq48_YPv4SbmgKOlsiN5Z_VKivxX_uDaxkkmX5/pub?gid=727692573&single=true&output=csv', {
+                    download: true, 
+                    header: true,
+                    complete: function(results) {
+                        var donationTotal = results.data[0]['sum amount'];
+                        $('#total').prop('i',0).animate({i: donationTotal},{
+                            duration: 1000,
+                            easing: 'linear',
+                            step: function(now) {
+                                $('#total').text(Math.ceil(now));
+                            },
+                            complete: function() {
+                                console.log(parseFloat(donationTotal).toFixed(2))
+                                $('total').text(parseFloat(donationTotal).toFixed(2))
+                            }
+                        });
+
+                        // $('#total').text(results.data[0]['sum amount']);
+                    }
+                })
+
+                var that = $('#thermometer');
+                setTimeout(function(){that.animate({width:that.attr('data-percent')},1000)}, 0);
+            }
+            
+            window.addEventListener('DOMContentLoaded', init)
+        </script>
+    </body>
+</html>
