@@ -8,10 +8,6 @@ description: Progress towards WLIA's current donation goal.
         <title>WLIA Donations Thermometer</title>
 
         <script src='assets/js/papaparse.min.js'></script>
-        <script
-            src="https://code.jquery.com/jquery-3.6.0.min.js"
-            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-            crossorigin="anonymous"></script>
 
         <style>
             * {
@@ -37,7 +33,7 @@ description: Progress towards WLIA's current donation goal.
 
         <script>
             // Create our number formatter.
-                var formatter = new Intl.NumberFormat('en-US', {
+            var formatter = new Intl.NumberFormat('en-US', {
                 style: 'currency',
                 currency: 'USD',
 
@@ -45,6 +41,40 @@ description: Progress towards WLIA's current donation goal.
                 minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
                 maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
             });
+
+            // Transpose arrays
+            function transpose(a) {
+
+                // Calculate the width and height of the Array
+                var w = a.length || 0;
+                var h = a[0] instanceof Array ? a[0].length : 0;
+
+                // In case it is a zero matrix, no transpose routine needed.
+                if(h === 0 || w === 0) { return []; }
+
+                /**
+                 * @var {Number} i Counter
+                 * @var {Number} j Counter
+                 * @var {Array} t Transposed data is stored in this array.
+                 */
+                var i, j, t = [];
+
+                // Loop through every item in the outer array (height)
+                for(i=0; i<h; i++) {
+
+                // Insert a new row (array)
+                t[i] = [];
+
+                // Loop through every item per item in outer array (width)
+                for(j=0; j<w; j++) {
+
+                    // Save transposed data.
+                    t[i][j] = a[j][i];
+                }
+                }
+
+                return t;
+            }
 
             function init() {
                 var canvas0 = document.getElementById('canvas0');
@@ -55,9 +85,21 @@ description: Progress towards WLIA's current donation goal.
                 window.addEventListener('resize', resizeCanvas, false);
 
                 resizeCanvas();
+
+                Papa.parse('https://docs.google.com/spreadsheets/d/e/2PACX-1vSIfYyN7ti2FNwOxvp63Ne-0UKh7aLyZ2M6BpTXbtxq48_YPv4SbmgKOlsiN5Z_VKivxX_uDaxkkmX5/pub?gid=1074401279&single=true&output=csv', {
+                    download: true, 
+                    header: false,
+                    complete: function(results) {
+                        const transposed = transpose(results.data)
+                        const headers = transposed.shift();
+                        const settings = transposed.map(row => row.reduce((acc, col, ind) => {acc[headers[ind]] = col; return acc}, {}))[0]
+
+                        main(settings);
+                    }
+                })
             }
 
-            function main(data) {
+            function main(settings) {
                 function drawThermometer(linewidth, strokestyle, fillstyle) {
                     ctx.lineCap = "round";
                     ctx.beginPath();
@@ -85,14 +127,11 @@ description: Progress towards WLIA's current donation goal.
                     ctx.save();
 
                     // Clipping Path
-                    drawThermometer(12, "#33333", null);
-                    drawThermometer(4, "white", "white");
+                    drawThermometer(Number(settings['Thermometer Line Width']), settings['Primary Color'], null);
+                    drawThermometer(Number(settings['Thermometer Line Buffer']), "white", "white");
                     ctx.stroke();
                     ctx.save()
                     ctx.clip();
-
-                    // Grey background fill
-                    // ctx.fillRect(centerX-(bulbRadius), padding, bulbRadius*2, maxY-(padding*2));
 
                     // Green fill
                     ctx.beginPath();
@@ -101,9 +140,8 @@ description: Progress towards WLIA's current donation goal.
                     ctx.lineTo(maxX, maxY);
                     ctx.lineTo(0, maxY);
                     ctx.closePath();
-                    ctx.fillStyle = "#46d190";
+                    ctx.fillStyle = settings['Secondary Color'];
                     ctx.fill();
-                    // ctx.fillRect(centerX-(bulbRadius), padding, bulbRadius*2, maxY-(padding*2));
 
                     ctx.restore();
                     ctx.restore();
@@ -119,9 +157,9 @@ description: Progress towards WLIA's current donation goal.
                 var centerY = maxY/2;
 
                 // Thermometer body
-                var width = 65;
-                var padding = 50;
-                var bulbRadius = width*0.8;
+                var width = Number(settings['Thermometer Width']); //65
+                var padding = Number(settings['Thermometer Padding']); //50
+                var bulbRadius = Number(settings['Bulb Radius']); //width*0.8
 
                 // Donation total
                 Papa.parse('https://docs.google.com/spreadsheets/d/e/2PACX-1vSIfYyN7ti2FNwOxvp63Ne-0UKh7aLyZ2M6BpTXbtxq48_YPv4SbmgKOlsiN5Z_VKivxX_uDaxkkmX5/pub?gid=727692573&single=true&output=csv', {
@@ -140,8 +178,8 @@ description: Progress towards WLIA's current donation goal.
 
                         // Add donation total
                         var ctx = canvas2.getContext("2d");
-                        ctx.font = "bold 20px Arial";
-                        ctx.fillStyle = "white";
+                        ctx.font = "bold "+settings['Font Size']+"px Arial";
+                        ctx.fillStyle = settings['Total Text Color'];
                         ctx.textBaseline = "middle";
                         ctx.textAlign = "center";
                         ctx.fillText(formatter.format(donationTotal), centerX, maxY-padding-bulbRadius)
@@ -163,13 +201,13 @@ description: Progress towards WLIA's current donation goal.
                             var centerY = maxY/2;
                             
                             const barHeight = maxY-2*padding;
-                            const ll = width*1.2;  // Label Line Length
-                            const lp = 10;  // Label padding
-                            ctx.lineWidth = 4;
-                            ctx.font = "20px Arial";
-                            ctx.fillStyle = "#333333";
+                            const ll = Number(settings['Label Line Length']); //width*1.2;  // Label Line Length
+                            const lp = Number(settings['Label Padding']); //10;  // Label padding
+                            ctx.lineWidth = Number(settings['Label Line Width']); //4
+                            ctx.font = settings['Font Size']+"px Arial";
+                            ctx.fillStyle = settings['Primary Color'];
                             ctx.textBaseline = "middle";
-                            ctx.strokeStyle = "#333333";
+                            ctx.strokeStyle = settings['Primary Color'];
 
                             // Overall Goal
                             ctx.beginPath();
@@ -188,8 +226,8 @@ description: Progress towards WLIA's current donation goal.
                                 let lineY = padding+barHeight-(barHeight*goal/donationGoal)
 
                                 if (goal<donationTotal){
-                                    ctx.fillStyle = "#46d190";
-                                    ctx.strokeStyle = "#46d190";
+                                    ctx.fillStyle = settings['Secondary Color'];
+                                    ctx.strokeStyle = settings['Secondary Color'];
                                 }
 
                                 ctx.beginPath();
@@ -223,8 +261,6 @@ description: Progress towards WLIA's current donation goal.
 
                 canvas2.width = window.innerWidth;
                 canvas2.height = window.innerHeight;
-
-                main(); 
             }
 
             
