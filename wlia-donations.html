@@ -210,6 +210,13 @@ description: Progress towards WLIA's current donation goal.
                             ctx.strokeStyle = settings['Primary Color'];
 
                             // Overall Goal
+                            if (donationTotal<donationGoal) {
+                                ctx.fillStyle = settings['Primary Color'];
+                                ctx.strokeStyle = settings['Primary Color'];
+                            } else {
+                                ctx.fillStyle = settings['Secondary Color'];
+                                ctx.strokeStyle = settings['Secondary Color'];
+                            }
                             ctx.beginPath();
                             ctx.moveTo(centerX, padding);
                             ctx.lineTo(centerX+ll, padding);
