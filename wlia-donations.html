@@ -9,85 +9,220 @@
             crossorigin="anonymous"></script>
 
         <style>
-            body {
+            * {
                 margin: 0;
                 padding: 0;
             }
-            #total {
-                position: inline-block;
-                text-align: center;
-                left: 50%;
+            html, body {
+                width: 100%;
+                height: 100%;
             }
-            #thermometer {
-                margin-top: 10vh;
-                width: 4rem;
-                height: calc(80vh - 3rem);
-                background-color: #c2c2c2;
-                border-radius: 0.5rem;
-                display: inline-block;
-            }
-            /* .thermometer:after {
-                content: '';
-                margin-top: calc(80vh - 6rem);
-                margin-left: -1rem;
-                height: 6rem;
-                width: 6rem;
-                background-color: #46d190;
-                border-radius: 50%;
-                display: inline-block; */
+            canvas {
+                display: block;
+                position: absolute;
+                left: 0;
+                top: 0;
             }
         </style>
     </head>
     <body>
-        <div style="text-align:center">
-            <h2 id="total">0</h2>
-            <span id="thermometer"></span>
-        </div>
+        <canvas id="canvas0" syle="z-index: 0;"></canvas>
+        <canvas id="canvas1" syle="z-index: 1;"></canvas>
+        <canvas id="canvas2" syle="z-index: 1;"></canvas>
 
         <script>
-            var data = {
-                total: function() {
-                    return
-                }
-            };
+            // Create our number formatter.
+                var formatter = new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+
+                // These options are needed to round to whole numbers if that's what you want.
+                minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
+                maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
+            });
 
             function init() {
-                // Goals
-                Papa.parse('https://docs.google.com/spreadsheets/d/e/2PACX-1vSIfYyN7ti2FNwOxvp63Ne-0UKh7aLyZ2M6BpTXbtxq48_YPv4SbmgKOlsiN5Z_VKivxX_uDaxkkmX5/pub?gid=1682016239&single=true&output=csv', {
-                    download: true,
-                    header: true,
-                    complete: function(results) {
-                        main(results.data);
-                    }
-                })
+                var canvas0 = document.getElementById('canvas0');
+                var canvas1 = document.getElementById('canvas1');
+                var canvas2 = document.getElementById('canvas2');
+
+                // resize the canvas to fill browser window dynamically
+                window.addEventListener('resize', resizeCanvas, false);
+
+                resizeCanvas();
             }
 
             function main(data) {
+                function drawThermometer(linewidth, strokestyle, fillstyle) {
+                    ctx.lineCap = "round";
+                    ctx.beginPath();
+                    ctx.moveTo(centerX+(width/2), padding);
+                    ctx.lineTo(centerX+(width/2), maxY-padding-bulbRadius-Math.sqrt(bulbRadius*bulbRadius-(width/2)*(width/2)));
+                    ctx.arc(centerX, maxY-padding-bulbRadius, bulbRadius, 1.5*Math.PI+Math.asin((width/2)*Math.sin(90*Math.PI/180)/bulbRadius), 1.5*Math.PI-Math.asin((width/2)*Math.sin(90*Math.PI/180)/bulbRadius));
+                    ctx.lineTo(centerX-(width/2), padding);
+                    ctx.closePath();
+
+                    ctx.lineWidth = linewidth;
+                    ctx.strokeStyle = strokestyle;
+                    ctx.stroke();
+                    if (fillstyle) {
+                        ctx.fillStyle = fillstyle;
+                        ctx.fill();
+                    }
+                }
+
+                function animateFill() {
+                    if (start > end) {
+                        requestAnimationFrame(animateFill);
+                    }
+                    
+                    ctx.clearRect(0, 0, maxX, maxY);
+                    ctx.save();
+
+                    // Clipping Path
+                    drawThermometer(12, "#33333", null);
+                    drawThermometer(4, "white", "white");
+                    ctx.stroke();
+                    ctx.save()
+                    ctx.clip();
+
+                    // Grey background fill
+                    // ctx.fillRect(centerX-(bulbRadius), padding, bulbRadius*2, maxY-(padding*2));
+
+                    // Green fill
+                    ctx.beginPath();
+                    ctx.moveTo(0, start);
+                    ctx.lineTo(maxX, start);
+                    ctx.lineTo(maxX, maxY);
+                    ctx.lineTo(0, maxY);
+                    ctx.closePath();
+                    ctx.fillStyle = "#46d190";
+                    ctx.fill();
+                    // ctx.fillRect(centerX-(bulbRadius), padding, bulbRadius*2, maxY-(padding*2));
+
+                    ctx.restore();
+                    ctx.restore();
+
+                    start-=5;
+                }
+
+                // Create context and get needed measurements
+                var ctx = canvas1.getContext("2d");
+                var maxX = canvas1.width;
+                var maxY = canvas1.height;
+                var centerX = maxX/2;
+                var centerY = maxY/2;
+
+                // Thermometer body
+                var width = 65;
+                var padding = 50;
+                var bulbRadius = width*0.8;
+
                 // Donation total
                 Papa.parse('https://docs.google.com/spreadsheets/d/e/2PACX-1vSIfYyN7ti2FNwOxvp63Ne-0UKh7aLyZ2M6BpTXbtxq48_YPv4SbmgKOlsiN5Z_VKivxX_uDaxkkmX5/pub?gid=727692573&single=true&output=csv', {
                     download: true, 
                     header: true,
                     complete: function(results) {
                         var donationTotal = results.data[0]['sum amount'];
-                        $('#total').prop('i',0).animate({i: donationTotal},{
-                            duration: 1000,
-                            easing: 'linear',
-                            step: function(now) {
-                                $('#total').text(Math.ceil(now));
-                            },
-                            complete: function() {
-                                console.log(parseFloat(donationTotal).toFixed(2))
-                                $('total').text(parseFloat(donationTotal).toFixed(2))
-                            }
-                        });
+                        var donationGoal = results.data[0]['goal'];
 
-                        // $('#total').text(results.data[0]['sum amount']);
+                        // Animated green fill
+                        start = maxY-padding;
+                        end = padding+(maxY-2*padding)-((maxY-2*padding)*donationTotal/donationGoal);
+                        animateFill();
+
+                        goals(donationGoal,donationTotal);
+
+                        // Add donation total
+                        var ctx = canvas2.getContext("2d");
+                        ctx.font = "bold 20px Arial";
+                        ctx.fillStyle = "white";
+                        ctx.textBaseline = "middle";
+                        ctx.textAlign = "center";
+                        ctx.fillText(formatter.format(donationTotal), centerX, maxY-padding-bulbRadius)
+                        
                     }
                 })
 
-                var that = $('#thermometer');
-                setTimeout(function(){that.animate({width:that.attr('data-percent')},1000)}, 0);
+                function goals(donationGoal,donationTotal) {
+                    Papa.parse('https://docs.google.com/spreadsheets/d/e/2PACX-1vSIfYyN7ti2FNwOxvp63Ne-0UKh7aLyZ2M6BpTXbtxq48_YPv4SbmgKOlsiN5Z_VKivxX_uDaxkkmX5/pub?gid=1682016239&single=true&output=csv', {
+                        download: true,
+                        header: true,
+                        complete: function(results) {
+                            var data = results.data;
+
+                            var ctx = canvas0.getContext("2d");
+                            var maxX = canvas0.width;
+                            var maxY = canvas0.height;
+                            var centerX = maxX/2;
+                            var centerY = maxY/2;
+                            
+                            const barHeight = maxY-2*padding;
+                            const ll = width*1.2;  // Label Line Length
+                            const lp = 10;  // Label padding
+                            ctx.lineWidth = 4;
+                            ctx.font = "20px Arial";
+                            ctx.fillStyle = "#333333";
+                            ctx.textBaseline = "middle";
+                            ctx.strokeStyle = "#333333";
+
+                            // Overall Goal
+                            ctx.beginPath();
+                            ctx.moveTo(centerX, padding);
+                            ctx.lineTo(centerX+ll, padding);
+                            ctx.stroke();
+                            ctx.textAlign = "left";
+                            ctx.fillText(formatter.format(donationGoal), centerX+ll+lp, padding);
+
+                            ctx.save();
+
+                            // Indivual Goals
+                            for (i=0; i<data.length; i++){
+                                // console.log(data[i])
+                                let goal = Number(data[i]['Goal'].replace(/[$,]+/g,""));
+                                let lineY = padding+barHeight-(barHeight*goal/donationGoal)
+
+                                if (goal<donationTotal){
+                                    ctx.fillStyle = "#46d190";
+                                    ctx.strokeStyle = "#46d190";
+                                }
+
+                                ctx.beginPath();
+                                ctx.moveTo(centerX, lineY);
+                                if(i % 2 == 0) { // even
+                                    ctx.lineTo(centerX-ll, lineY);
+                                    ctx.textAlign = "right";
+                                    ctx.fillText(data[i]['Description']+" - "+data[i]['Goal'], centerX-ll-lp, lineY);
+                                } else { // odd
+                                    ctx.lineTo(centerX+ll, lineY);
+                                    ctx.textAlign = "left";
+                                    ctx.fillText(data[i]['Goal']+" - "+data[i]['Description'], centerX+ll+lp, lineY);
+                                }
+                                ctx.stroke();
+                            }
+
+                            ctx.restore();
+
+                        }
+                    })
+                }
+                
             }
+
+            function resizeCanvas() {
+                canvas0.width = window.innerWidth;
+                canvas0.height = window.innerHeight;
+
+                canvas1.width = window.innerWidth;
+                canvas1.height = window.innerHeight;
+
+                canvas2.width = window.innerWidth;
+                canvas2.height = window.innerHeight;
+
+                main(); 
+            }
+
+            
             
             window.addEventListener('DOMContentLoaded', init)
         </script>
