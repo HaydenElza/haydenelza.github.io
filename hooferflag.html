@@ -117,28 +117,26 @@ description: Hoofer Sailing flag history and Hoofer flag change notifications.
 	
 
 	<script src="assets/js/jquery.min.js"></script>
-	<script src='assets/js/tabletop.min.js'></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.1/papaparse.min.js" integrity="sha512-EbdJQSugx0nVWrtyK3JdQQ/03mS3Q1UiAhRtErbwl1YL/+e2hZdlIcSURxxh7WXHTzn83sjlh2rysACoJGfb6g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 	<script>
-		window.onload = function() { init() };
-
 		function init() {
-			Tabletop.init( { 
-				key: '1gtrfO23I4Ph_byR8x0QiJi1QmyFofVsK5LuAE-6TF1A',
-				orderby: 'lastupdated',
-				reverse: true,
-				callback: fillHistory,
-				simpleSheet: true 
-			} )
-		}
+			Papa.parse('https://docs.google.com/spreadsheets/d/1gtrfO23I4Ph_byR8x0QiJi1QmyFofVsK5LuAE-6TF1A/pub?gid=168491986&output=csv', {
+			download: true,
+			header: true,
+			complete: fillHistory,
+		})}
+		window.addEventListener('DOMContentLoaded', init)
 
-		function fillHistory(data, tabletop) {
+		function fillHistory(results) {
+			var data = results.data;
 			// Flag history
 			for (var i=0,  dataLen=(data.length)>15?15:data.length; i < dataLen; i++) {
 				var flagColor = data[i]['Flag Color'];
 				var lastUpdated = new Date(data[i]['Last Updated'].replace(/\ \d:/g,function(x){ return ' 0'+x.substr(1,2)}).replace(/ /g,'T')+'Z');
 				$('#flag-history').append('<tr><td>'+data[i]['Flag Color']+"</td><td>"+lastUpdated.toDateString()+" "+lastUpdated.toTimeString()+'</td></tr>');
 			}
-			$('#flag-history').append('<a href="https://docs.google.com/spreadsheets/d/1gtrfO23I4Ph_byR8x0QiJi1QmyFofVsK5LuAE-6TF1A/edit?usp=sharing">view full</a>')
+			$('#flag-history').append('<a target="_blank" href="https://docs.google.com/spreadsheets/d/1gtrfO23I4Ph_byR8x0QiJi1QmyFofVsK5LuAE-6TF1A/edit?usp=sharing">view full</a>')
 		}
 
 		// Current Conditions
