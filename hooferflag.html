@@ -25,7 +25,7 @@ description: Hoofer Sailing flag history and Hoofer flag change notifications.
 			list-style: none;
 		}
 		table {
-			margin: 2em auto;
+			/* margin: 2em auto; */
 			border-spacing: 15px 0;
 			font-family: monospace;
 		}
@@ -133,8 +133,8 @@ description: Hoofer Sailing flag history and Hoofer flag change notifications.
 			// Flag history
 			for (var i=0,  dataLen=(data.length)>15?15:data.length; i < dataLen; i++) {
 				var flagColor = data[i]['Flag Color'];
-				var lastUpdated = new Date(data[i]['Last Updated'].replace(/\ \d:/g,function(x){ return ' 0'+x.substr(1,2)}).replace(/ /g,'T')+'Z');
-				$('#flag-history').append('<tr><td>'+data[i]['Flag Color']+"</td><td>"+lastUpdated.toDateString()+" "+lastUpdated.toTimeString()+'</td></tr>');
+				// var lastUpdated = new Date(data[i]['Last Updated'].replace(/\ \d:/g,function(x){ return ' 0'+x.substr(1,2)}).replace(/ /g,'T')+'Z');
+				$('#flag-history').append('<tr><td>'+data[i]['Flag Color']+"</td><td>"+data[i]['Last Updated']+'</td></tr>');
 			}
 			$('#flag-history').append('<a target="_blank" href="https://docs.google.com/spreadsheets/d/1gtrfO23I4Ph_byR8x0QiJi1QmyFofVsK5LuAE-6TF1A/edit?usp=sharing">view full</a>')
 		}
