@@ -221,11 +221,14 @@ description: Just a rural Wisconsinite making his way through the world solving 
 	#tracks > figure > img {
 		width: 100%;
 		filter: saturate(0) contrast(0.7);
+		transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 	}
 
 	#tracks > figure > img:hover {
 		width: 100%;
 		filter: saturate(1) contrast(1);
+		transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+		box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.26);
 	}
 
 	#tracks > figure > figcaption {
@@ -254,16 +257,13 @@ description: Just a rural Wisconsinite making his way through the world solving 
 		-webkit-filter: grayscale(1);
 		-moz-filter: grayscale(1);
 		filter: grayscale(1);
-		-webkit-transition: all 0.2s linear;
-		-moz-transition: all 0.2s linear;
-		-o-transition: all 0.2s linear;
-		transition: all 0.2s linear;
+		transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 	}
 	.project img:hover {
 		-webkit-filter: grayscale(0);
 		-moz-filter: grayscale(0);
 		filter: grayscale(0);
-		transition: box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+		transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 		box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.26);
 	}
 	.project img.wide {
