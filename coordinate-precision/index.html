@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coordinate Precision</title>
+
+  <!-- CSS Framework -->
+  <link rel="stylesheet" href="assets/tiny-brutalism.css" />
+
+  <!-- Image Map Resizer -->
+  <script src="assets/imageMapResizer.min.js"></script>
+
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+
+  <style>
+    body {
+      margin: 2em;
+    }
+    #comic {
+      max-width: 100%;
+    }
+    #map {
+      height: 50vw;
+    }
+    #coordinate-box {
+      position: relative;
+      z-index: 9999;
+      margin-left: auto;
+      margin-right: auto;
+      width: 70%;
+      background-color: white;
+    }
+
+  </style>
+  
+</head>
+<body>
+  <div class="row">
+    <div class="col col-6">
+      <div class="box">
+        <img id="comic" src="assets/xkcd-2170.png" usemap="#show-coords"/>
+        <map name="show-coords">
+          <area shape="rect" coords="42,140,1040,233"  alt="28°N, 80°W"                                 title="28°N, 80°W"                                 onclick="addPolygonToMap(['28', '-80'])">
+          <area shape="rect" coords="42,233,1040,293"  alt="28.5°N, 80.6°W"                             title="28.5°N, 80.6°W"                             onclick="addPolygonToMap(['28.5', '-80.6'])">
+          <area shape="rect" coords="42,293,1040,350"  alt="28.52°N, 80.68°W"                           title="28.52°N, 80.68°W"                           onclick="addPolygonToMap(['28.52', '-80.68'])">
+          <area shape="rect" coords="42,350,1040,443"  alt="28.523°N, 80.683°W"                         title="28.523°N, 80.683°W"                         onclick="addPolygonToMap(['28.523', '-80.683'])">
+          <area shape="rect" coords="42,443,1040,540"  alt="28.5234°N, 80.6830°W"                       title="28.5234°N, 80.6830°W"                       onclick="addPolygonToMap(['28.5234', '-80.6830'])">
+          <area shape="rect" coords="42,540,1040,670"  alt="28.52345°N, 80.68309°W"                     title="28.52345°N, 80.68309°W"                     onclick="addPolygonToMap(['28.52345', '-80.68309'])">
+          <area shape="rect" coords="42,670,1040,765"  alt="28.5234571°N, 80.6830941°W"                 title="28.5234571°N, 80.6830941°W"                 onclick="addPolygonToMap(['28.5234571', '-80.6830941'])">
+          <area shape="rect" coords="42,765,1040,863"  alt="28.523457182°N, 80.683094159°W"             title="28.523457182°N, 80.683094159°W"             onclick="addPolygonToMap(['28.523457182', '-80.683094159'])">
+          <area shape="rect" coords="42,863,1040,1035" alt="28.523457182818284°N, 80.683094159265358°W" title="28.523457182818284°N, 80.683094159265358°W" onclick="addPolygonToMap(['28.523457182818284', '-80.683094159265358'])">
+        </map>
+        <a href="https://xkcd.com/2170/" target="_blank">View on xkcd.com</a>
+      </div>
+    </div>
+    <div class="col col-6">
+      <div id="map" class="box">
+        <!-- <div class="row">
+          <div class="col">
+            <div id="coordinate-box" class="box">
+              Enter Your Own Coordinates:
+              <form>
+                <div class="row">
+                  <div class="col col-6"><input id="lat" class="mb-0" type="text" placeholder="Lat"></div>
+                  <div class="col col-6"><input id="lon" class="mb-0" type="text" placeholder="Lon"></div>
+                </div>
+              </form>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  
+  <script>
+    var map = L.map('map').setView([0, 0], 3);
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+
+    // Global polygon var so we can remove later
+    var polygon;
+
+    function addPolygonToMap([lat,lon]) {
+
+      // Utility to find the number of decimals
+      function countDecimals(numberString) {
+        if (numberString.split(".")[0] === numberString) return 0;
+        return numberString.split(".")[1].length || 0; 
+      }
+
+      // Remove previous polygon
+      if (polygon !== undefined) polygon.removeFrom(map);
+      
+      const coordinate = [Number(lat),Number(lon)];
+      const latDiff = Math.pow(10,-countDecimals(lat))/2;
+      const lonDiff = Math.pow(10,-countDecimals(lon))/2;
+
+      console.log(latDiff,lonDiff)
+
+      polygon = L.polygon([
+        [coordinate[0]-latDiff, coordinate[1]-lonDiff],
+        [coordinate[0]+latDiff, coordinate[1]-lonDiff],
+        [coordinate[0]+latDiff, coordinate[1]+lonDiff],
+        [coordinate[0]-latDiff, coordinate[1]+lonDiff],
+        [coordinate[0]-latDiff, coordinate[1]-lonDiff]
+      ]).addTo(map);
+
+      map.fitBounds(polygon.getBounds());
+    }
+
+    function updateMapFromForm() {
+      const lat = document.getElementById("lat").value;
+      const lon = document.getElementById("lon").value;
+      addPolygonToMap([lat,lon]);
+    };
+
+    imageMapResize();
+
+    // document.getElementById("lat").addEventListener('input', (event) => {
+    //   updateMapFromForm();
+    // });
+    // document.getElementById("lon").addEventListener('input', (event) => {
+    //   updateMapFromForm();
+    // });
+  
+  </script>
+</body>
+</html>
