@@ -183,8 +183,14 @@
 
       // Update the tab parameter
       if (tabName !== null) queryParams.set("tab", tabName);
-      if (lat !== null) queryParams.set("lat", lat);
-      if (lon !== null) queryParams.set("lon", lon);
+      if (lat !== null) {
+        queryParams.set("lat", lat);
+        document.getElementById('lat').value = lat;
+      }
+      if (lon !== null) {
+        queryParams.set("lon", lon);
+        document.getElementById('lon').value = lon;
+      };
 
       // Update URL without reloading
       const newRelativePathQuery = window.location.pathname + "?" + queryParams.toString();
