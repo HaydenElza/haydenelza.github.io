@@ -67,7 +67,7 @@
       <div class="row mb-1">
         <button class="col col-3 mr-1" onclick="tabHandler(event.target.name)" name="xkcd">xkcd</button>
         <button class="col col-3 mr-1" onclick="tabHandler(event.target.name)" name="custom">custom coordinates</button>
-        <button class="col col-3 mr-1" onclick="tabHandler(event.target.name)" name="find">find coordinates</button>
+        <!-- <button class="col col-3 mr-1" onclick="tabHandler(event.target.name)" name="find">find coordinates</button> -->
       </div>
       <div class="row mt-1">
         <div id="xkcd" class="box">
@@ -171,6 +171,9 @@
       
       // Hide remaining tabs
       ['xkcd','custom','find'].filter(item => item !== name).forEach(tab => document.getElementById(tab).style.visibility = 'collapse')
+    
+      // Initilize image map if xkcd tab
+      if (name == 'xkcd') imageMapResize();
     }
 
     // URL Parameters
@@ -218,7 +221,6 @@
     });
 
     // Initialize
-    imageMapResize();
     loadFromUrlParameters();
     
   
