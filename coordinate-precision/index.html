@@ -29,14 +29,6 @@
     #map {
       height: 50vw;
     }
-    #coordinate-box {
-      position: relative;
-      z-index: 9999;
-      margin-left: auto;
-      margin-right: auto;
-      width: 70%;
-      background-color: white;
-    }
 
     /* Utility Extensions */
     .mt-0 { margin-top: 0; }
@@ -73,9 +65,9 @@
     
     <div class="col col-5 mb-0">
       <div class="row mb-1">
-        <button class="col col-3 mr-1" onclick="tabHandler(event)" name="xkcd">xkcd</button>
-        <button class="col col-3 mr-1" onclick="tabHandler(event)" name="custom">custom coordinates</button>
-        <button class="col col-3 mr-1" onclick="tabHandler(event)" name="find">find coordinates</button>
+        <button class="col col-3 mr-1" onclick="tabHandler(event.target.name)" name="xkcd">xkcd</button>
+        <button class="col col-3 mr-1" onclick="tabHandler(event.target.name)" name="custom">custom coordinates</button>
+        <button class="col col-3 mr-1" onclick="tabHandler(event.target.name)" name="find">find coordinates</button>
       </div>
       <div class="row mt-1">
         <div id="xkcd" class="box">
@@ -95,7 +87,17 @@
           <a href="https://xkcd.com/2170/" target="_blank">View on xkcd.com</a>
         </div>
         <div id="custom" class="box col col-12" style="visibility: collapse">
-          custom coordinates
+          <div class="row">
+            <div class="col">
+              <p>Enter your own coordinates:</p>
+              <form>
+                <div class="row">
+                  <div class="col col-6"><label for="lat">latitude</label><input id="lat" class="mb-0" type="text" placeholder="Lat"></div>
+                  <div class="col col-6"><label for="lon">longitude</label><input id="lon" class="mb-0" type="text" placeholder="Lon"></div>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
         <div id="find" class="box col col-12" style="visibility: collapse">
           find coordinates
@@ -104,21 +106,7 @@
     </div>
     <!-- Map -->
     <div class="col col-7 pt-0 pl-2 pr-0">
-      <div id="map" class="box mb-0">
-        <!-- <div class="row">
-          <div class="col">
-            <div id="coordinate-box" class="box">
-              Enter Your Own Coordinates:
-              <form>
-                <div class="row">
-                  <div class="col col-6"><input id="lat" class="mb-0" type="text" placeholder="Lat"></div>
-                  <div class="col col-6"><input id="lon" class="mb-0" type="text" placeholder="Lon"></div>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div> -->
-      </div>
+      <div id="map" class="box mb-0"></div>
     </div>
     
   </div>
@@ -145,12 +133,12 @@
       // Remove previous polygon
       if (polygon !== undefined) polygon.removeFrom(map);
       
+      // Calculate coordinate and diffs
       const coordinate = [Number(lat),Number(lon)];
       const latDiff = Math.pow(10,-countDecimals(lat))/2;
       const lonDiff = Math.pow(10,-countDecimals(lon))/2;
 
-      console.log(latDiff,lonDiff)
-
+      // Create polygon and add it to map
       polygon = L.polygon([
         [coordinate[0]-latDiff, coordinate[1]-lonDiff],
         [coordinate[0]+latDiff, coordinate[1]-lonDiff],
@@ -160,6 +148,9 @@
       ]).addTo(map);
 
       map.fitBounds(polygon.getBounds());
+
+      // Update URL parameters
+      setUrlParameters({lat: lat, lon: lon})
     }
 
     function updateMapFromForm() {
@@ -168,16 +159,10 @@
       addPolygonToMap([lat,lon]);
     };
 
-    imageMapResize();
-
-    // Tab Handler
-    function tabHandler(e) {
-      const name = e.target.name;
-
+    // Tab Handl
+    function tabHandler(name) {
       setTabVisibility(name);
-
-      setUrlParameters(name);
-      
+      setUrlParameters({tabName: name});
     }
 
     function setTabVisibility(name) {
@@ -188,24 +173,54 @@
       ['xkcd','custom','find'].filter(item => item !== name).forEach(tab => document.getElementById(tab).style.visibility = 'collapse')
     }
 
-    function setUrlParameters(tabName=NaN) {
+    // URL Parameters
+    function setUrlParameters({tabName=null, lat=null, lon=null}) {
       // Get the current query parameters
       const queryParams = new URLSearchParams(window.location.search);
 
       // Update the tab parameter
-      if (tabName !== NaN) queryParams.set("tab", tabName);
+      if (tabName !== null) queryParams.set("tab", tabName);
+      if (lat !== null) queryParams.set("lat", lat);
+      if (lon !== null) queryParams.set("lon", lon);
 
       // Update URL without reloading
       const newRelativePathQuery = window.location.pathname + "?" + queryParams.toString();
       window.history.replaceState(null, "", newRelativePathQuery);
     } 
 
-    // document.getElementById("lat").addEventListener('input', (event) => {
-    //   updateMapFromForm();
-    // });
-    // document.getElementById("lon").addEventListener('input', (event) => {
-    //   updateMapFromForm();
-    // });
+    // Load from URL parameters
+    function loadFromUrlParameters() {
+      function forceCoordinateInputEvent() {
+        document.getElementById('lat').dispatchEvent(new Event('input'));
+      }
+      
+      // Get the current query parameters
+      const queryParams = new URLSearchParams(window.location.search);
+
+      // Get values
+      const tab = queryParams.get('tab');
+      const lat = queryParams.get('lat');
+      const lon = queryParams.get('lon');
+
+      // Load into interface
+      if (tab !== null) tabHandler(tab)
+      if (lat !== null) document.getElementById('lat').value = lat;
+      if (lon !== null) document.getElementById('lon').value = lon;
+      if (lat !== null || lon !== null) forceCoordinateInputEvent();
+    }
+
+    // Add event listners for custom coordinates
+    document.getElementById("lat").addEventListener('input', (event) => {
+      updateMapFromForm();
+    });
+    document.getElementById("lon").addEventListener('input', (event) => {
+      updateMapFromForm();
+    });
+
+    // Initialize
+    imageMapResize();
+    loadFromUrlParameters();
+    
   
   </script>
 </body>
